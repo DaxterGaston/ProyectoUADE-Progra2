@@ -13,9 +13,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - ViewConeObstacle
+  - Obstacle
+  - Player
   - 
   - 
   - 
