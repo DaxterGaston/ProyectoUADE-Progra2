@@ -1,39 +1,41 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
+    #region SetUp
 
-    [SerializeField] private int _maxBullets = 6;
-    private int _currentBullets;
+    #region Serializables
 
+    [SerializeField] 
+    private float speed = 5f;
+    [SerializeField]
+    private int _maxBullets = 6;
+    [SerializeField] 
+    private Camera _camera;
+    [SerializeField] 
+    private ViewCone _viewCone;
+    [SerializeField] 
+    private Collider _collider;
+    [SerializeField] 
+    private Image _hpImage;
+    [SerializeField] 
+    private Material _hideMaterial;
+    [SerializeField] 
+    private SpriteRenderer _spriteRenderer;
+
+    #endregion
 
     private bool _isDead;
-
-    // [SerializeField] private int _deathCounter;
-
-
+    private bool _walkingDirectionRight;
+    private int _currentBullets;
     private GameObject _tabCanvas;
-
-
     private Rigidbody _rigidbody;
     private Animator _animator;
     private float _hp;
     private int _facingDirection = 1;
-
     private float _h, _v;
-
-    [SerializeField] private Camera _camera;
-    [SerializeField] private ViewCone _viewCone;
-    [SerializeField] private Collider _collider;
-
-
-    [SerializeField] private Image _hpImage;
-
-
-    [SerializeField] private Material _hideMaterial;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
 
 
     private void Awake()
@@ -51,11 +53,10 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        
-
         _currentBullets = _maxBullets;
     }
     
+    #endregion
 
     private void UpdateHpBars()
     {
@@ -65,7 +66,13 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         GetInputs();
-        _animator.SetBool("IsWalking", _rigidbody.velocity.magnitude > 0.1f);
+        UpdateAnimations();
+    }
+
+    private void UpdateAnimations()
+    {
+        _animator.SetBool("Walking", _rigidbody.velocity.magnitude > 0.1f);
+        _animator.SetFloat("X", _h);
     }
 
     private void FixedUpdate() { _rigidbody.velocity = new Vector2(_h * speed, _v * speed); }
@@ -75,12 +82,13 @@ public class PlayerController : MonoBehaviour
         _h = Input.GetAxisRaw("Horizontal");
         _v = Input.GetAxisRaw("Vertical");
 
-        if (_isDead) return;
+        if (_h > 0)
+            _walkingDirectionRight = true;
+        if (_h < 0)
+            _walkingDirectionRight = false;
 
         if (Input.GetButtonDown("Fire1"))
         {
-            // if (_currentWeapon != null) _currentWeapon.Shoot();
-
             if (_currentBullets <= 0)
             {
                 Invoke("Reload", 2);
@@ -92,26 +100,16 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
-        // if (Input.GetKeyDown(KeyCode.I))
-        // {
-        //     _deathCounter++;
-        //     _customProp["DeathCounter"] = _deathCounter;
-        //     Debug.Log(_deathCounter);
-        // }
-
         if (_h != 0f || _v != 0f)
         {
-            _animator.SetFloat("X", _h);
-            _animator.SetFloat("Y", _v);
-
+            
             if (_h > 0)
             {
-                _spriteRenderer.flipX = false;
+                _spriteRenderer.flipX = true;
             }
             else if (_h < 0)
             {
-                _spriteRenderer.flipX = true;
+                _spriteRenderer.flipX = false;
             }
         }
     }
@@ -145,7 +143,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     private void Death()
     {
         var color = _spriteRenderer.color;
@@ -154,12 +151,10 @@ public class PlayerController : MonoBehaviour
         // GetComponent<PhotonRigidbodyView>().enabled = false;
     }
 
-    private void DisableSprite() { _spriteRenderer.enabled = false; }
 
     private void OnCollisionEnter(Collision other) { }
    
-    
-    public void RestoreHealth(int amount)
+    private void RestoreHealth(int amount)
     {
         if (_hp != 5)
             _hp += amount;
