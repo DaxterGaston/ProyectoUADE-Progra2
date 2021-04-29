@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPack : PickUp
+public class ArmorPack : PickUp
 {
-    [SerializeField] private int healingAmount = 1; // Cantidad de puntos que restaura el item
+    [SerializeField] private int repairAmount = 1; // Cantidad de puntos que restaura el item
     private LifeController targetLife;
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -15,6 +15,6 @@ public class HealthPack : PickUp
 
     public override void itemAction() // Accion que llama el jugador
     {
-        targetLife.HealDamage(healingAmount); // Accion que realiza este item en particular
+        targetLife.RepairArmor(repairAmount); // Accion que realiza este item en particular
     }
 }

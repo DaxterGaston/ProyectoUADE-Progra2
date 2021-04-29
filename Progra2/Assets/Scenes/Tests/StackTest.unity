@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 30876625}
   - component: {fileID: 30876624}
   m_Layer: 0
-  m_Name: PickUp (2)
+  m_Name: SpeedPack (2)
   m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,9 +150,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 30876623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98556578e32a3444e99ca3b65316ef2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 537423a7ef7c81f4e85f1606a73873f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedAmount: 10
+  speedDuration: 3
 --- !u!50 &30876625
 Rigidbody2D:
   serializedVersion: 4
@@ -371,6 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98556578e32a3444e99ca3b65316ef2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healingAmount: 10
 --- !u!50 &325283785
 Rigidbody2D:
   serializedVersion: 4
@@ -589,6 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98556578e32a3444e99ca3b65316ef2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healingAmount: 10
 --- !u!50 &428708353
 Rigidbody2D:
   serializedVersion: 4
@@ -733,6 +737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98556578e32a3444e99ca3b65316ef2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healingAmount: 10
 --- !u!50 &473990531
 Rigidbody2D:
   serializedVersion: 4
@@ -933,7 +938,7 @@ GameObject:
   - component: {fileID: 596642142}
   - component: {fileID: 596642141}
   m_Layer: 0
-  m_Name: PickUp (1)
+  m_Name: AmmoPack (1)
   m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -948,9 +953,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 596642140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98556578e32a3444e99ca3b65316ef2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 79c745d47b85b864d97277d3625ca6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  repairAmount: 10
 --- !u!50 &596642142
 Rigidbody2D:
   serializedVersion: 4
@@ -1169,6 +1175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98556578e32a3444e99ca3b65316ef2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healingAmount: 10
 --- !u!50 &739250833
 Rigidbody2D:
   serializedVersion: 4
@@ -1312,6 +1319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98556578e32a3444e99ca3b65316ef2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healingAmount: 10
 --- !u!50 &753268161
 Rigidbody2D:
   serializedVersion: 4
@@ -1456,6 +1464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98556578e32a3444e99ca3b65316ef2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healingAmount: 10
 --- !u!50 &899567146
 Rigidbody2D:
   serializedVersion: 4
@@ -1656,7 +1665,7 @@ GameObject:
   - component: {fileID: 1004842862}
   - component: {fileID: 1004842866}
   m_Layer: 0
-  m_Name: PickUp
+  m_Name: HealthPack(0)
   m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1786,6 +1795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98556578e32a3444e99ca3b65316ef2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healingAmount: 10
 --- !u!1 &1213363920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1943,11 +1953,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1431703752}
-  - component: {fileID: 1431703751}
   - component: {fileID: 1431703750}
   - component: {fileID: 1431703753}
   - component: {fileID: 1431703754}
+  - component: {fileID: 1431703751}
   - component: {fileID: 1431703755}
+  - component: {fileID: 1431703756}
+  - component: {fileID: 1431703757}
   m_Layer: 0
   m_Name: SimpleMovPlayer
   m_TagString: Untagged
@@ -1994,7 +2006,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6323440402676182306, guid: 1e0cfcffc77499745a27b2fa7c64f57d,
+  m_Sprite: {fileID: 3578146042720659300, guid: 1e69b99436dfdc448b54ad04ad98b93d,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2018,7 +2030,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb94f7437b346c14bbcd3487eed96f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  maxLifePoints: 100
+  maxArmorPoints: 100
 --- !u!4 &1431703752
 Transform:
   m_ObjectHideFlags: 0
@@ -2067,7 +2080,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.041708186, y: -0.09077656}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2078,7 +2091,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5319096, y: 0.8184469}
+  m_Size: {x: 0.48, y: 0.48}
   m_EdgeRadius: 0
 --- !u!114 &1431703755
 MonoBehaviour:
@@ -2102,6 +2115,31 @@ MonoBehaviour:
   - {fileID: 79310446}
   - {fileID: 940038561}
   - {fileID: 358738319}
+--- !u!114 &1431703756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431703749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fddbcbde76013b047b3fe9dc4c860e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1431703757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431703749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef430dd10e287564e9422bc6adcc7bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeedModifier: 5
 --- !u!1 &1564917462
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,6 +2172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98556578e32a3444e99ca3b65316ef2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healingAmount: 10
 --- !u!50 &1564917464
 Rigidbody2D:
   serializedVersion: 4
