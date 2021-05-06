@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ColaTD
+namespace TDAs.Abstracciones
 {
-    interface ICola_TDA
+    interface ICola_TDA<T>
     {
-        void InicializarCola();
+        void InicializarCola(int amount);
 
-        void Acolar(int x);
+        void Acolar(T x);
 
         void Desacolar();
 
         bool ColaVacia();
 
-        int Primero();
+        T Primero();
     }
 }

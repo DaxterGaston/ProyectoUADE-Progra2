@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TDAs.Abstracciones;
+using UnityEngine;
 
-namespace ColaTD
+namespace TDAs
 {
-    class Cola_TDA : ICola_TDA
+    public class Cola_TDA<T> : ICola_TDA<T> where T : MonoBehaviour
     {
-        int[] a;
+        T[] a;
         int indice;
-        public void Acolar(int x)
+
+        public int Cantidad { get => a.Length; }
+
+        public void Acolar(T x)
         {
             for(int i = indice - 1; i >= 0; i--)
             {
@@ -32,13 +32,13 @@ namespace ColaTD
             indice--;
         }
 
-        public void InicializarCola()
+        public void InicializarCola(int amount)
         {
-            a = new int[100];
+            a = new T[amount];
             indice = 0;
         }
 
-        public int Primero()
+        public T Primero()
         {
             return a[indice - 1];
         }
