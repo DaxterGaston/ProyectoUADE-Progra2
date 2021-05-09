@@ -42,6 +42,7 @@ public class InventoryTracker : MonoBehaviour
         var itemToUse = inventory.Pop(); // Guarda temporalmente el item que sale del stack
         itemToUse.itemAction();// Activa el item que sale del stack
         DisplaySprite(); // Actualiza el display del inventario
+        Destroy(itemToUse);
     }
 
     private void Update()
