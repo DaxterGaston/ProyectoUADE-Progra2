@@ -349,7 +349,10 @@ MonoBehaviour:
   velocidad: 2
   DistanciaDeParado: 3
   DistanciaDeFueraDeVision: 5
+  tiempoDeDisparo: 0
+  tiempoInicialDeDisparo: 5
   jugador: {fileID: 0}
+  bala: {fileID: 5645558734541573941, guid: 9ca888ca0f3da2749a3d751769fcb5b2, type: 3}
 --- !u!1 &821040030
 GameObject:
   m_ObjectHideFlags: 0

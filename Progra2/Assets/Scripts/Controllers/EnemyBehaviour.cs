@@ -8,12 +8,17 @@ public class EnemyBehaviour : MonoBehaviour
     public float DistanciaDeParado;
     public float DistanciaDeFueraDeVision;
 
+    public float tiempoDeDisparo;
+    public float tiempoInicialDeDisparo;
+
     public Transform jugador;
+    public GameObject bala;
 
     // Start is called before the first frame update
     void Start()
     {
         jugador = GameObject.FindGameObjectWithTag("Player").transform;
+        tiempoDeDisparo = tiempoInicialDeDisparo;
         
     }
     
@@ -21,6 +26,7 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        tiempoDeDisparo -= Time.deltaTime;
         if (Vector3.Distance(transform.position, jugador.position) <= DistanciaDeFueraDeVision)
         {
 
@@ -31,6 +37,11 @@ public class EnemyBehaviour : MonoBehaviour
             else if (Vector3.Distance(transform.position, jugador.position) <= DistanciaDeParado)
             {
                 transform.position = this.transform.position;
+                if (tiempoDeDisparo <= 0)
+                {
+                    Instantiate(bala, transform.position, Quaternion.identity);
+                    tiempoDeDisparo = tiempoInicialDeDisparo;
+                }
             }
         }
         
