@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -36,7 +35,6 @@ public class PlayerController : MonoBehaviour
     private float _hp;
     private int _facingDirection = 1;
     private float _h, _v;
-
 
     private void Awake()
     {
@@ -118,6 +116,7 @@ public class PlayerController : MonoBehaviour
     {
         var mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
         var direction = (mousePosition - transform.position).normalized;
+
     }
 
     private void Reload() { _currentBullets = _maxBullets; }
@@ -148,13 +147,9 @@ public class PlayerController : MonoBehaviour
         var color = _spriteRenderer.color;
         _spriteRenderer.color = new Color(color.r, color.g, color.b, 0.5f);
         _collider.enabled = false;
-        // GetComponent<PhotonRigidbodyView>().enabled = false;
     }
 
-
-    private void OnCollisionEnter(Collision other) { }
-   
-    private void RestoreHealth(int amount)
+    public void RestoreHealth(int amount)
     {
         if (_hp != 5)
             _hp += amount;
