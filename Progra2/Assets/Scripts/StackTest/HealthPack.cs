@@ -7,8 +7,9 @@ public class HealthPack : PickUp
     [SerializeField] private int healingAmount = 1; // Cantidad de puntos que restaura el item
     private LifeController targetLife;
 
-    private void OnCollisionEnter2D(Collision2D other)
+    public override void OnCollisionEnter2D(Collision2D other)
     {
+        base.OnCollisionEnter2D(other);
         if (!other.gameObject.GetComponent(typeof(LifeController))) return; // Comprueba si el otro objeto tiene controlador de vida
         targetLife = other.gameObject.GetComponent(typeof(LifeController)) as LifeController; // Guarda la referencia del controlador de vida
     }

@@ -8,8 +8,9 @@ public class SpeedPack : PickUp
     [SerializeField] private float speedDuration = 1; // Duracion del buff 
     private MovementController target;
 
-    private void OnCollisionEnter2D(Collision2D other)
+    public override void OnCollisionEnter2D(Collision2D other)
     {
+        base.OnCollisionEnter2D(other);
         if (!other.gameObject.GetComponent(typeof(MovementController))) return; // Comprueba si el otro objeto tiene controlador de vida
         target = other.gameObject.GetComponent(typeof(MovementController)) as MovementController; // Guarda la referencia del controlador de vida
     }
