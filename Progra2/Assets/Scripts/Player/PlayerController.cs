@@ -23,10 +23,18 @@ public class PlayerController : MonoBehaviour
     private Material _hideMaterial;
     [SerializeField] 
     private SpriteRenderer _spriteRenderer;
+    [SerializeField]
+    private GameObject _bullet;
 
     #endregion
 
     private bool _isDead;
+
+    public PlayerController(bool isDead)
+    {
+        _isDead = isDead;
+    }
+
     private bool _walkingDirectionRight;
     private int _currentBullets;
     private GameObject _tabCanvas;
@@ -128,16 +136,7 @@ public class PlayerController : MonoBehaviour
 
         if (_hp <= 0)
         {
-            // _deathCounter += 1;
-
-            // Debug.Log(_deathCounter);
-
-            // _customProp["DeathCounter"] = _deathCounter;
-
-            // Initialize();
-
             _isDead = true;
-
             _viewCone.Angle = 360f;
         }
     }
