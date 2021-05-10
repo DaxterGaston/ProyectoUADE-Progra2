@@ -10,40 +10,45 @@ public class EnemyBehaviour : MonoBehaviour
 
     public float tiempoDeDisparo;
     public float tiempoInicialDeDisparo;
-
-    public Transform jugador;
+    Collider2D[] colliders;
     public GameObject bala;
 
     // Start is called before the first frame update
     void Start()
     {
-        jugador = GameObject.FindGameObjectWithTag("Player").transform;
         tiempoDeDisparo = tiempoInicialDeDisparo;
         
     }
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        tiempoDeDisparo -= Time.deltaTime;
-        if (Vector3.Distance(transform.position, jugador.position) <= DistanciaDeFueraDeVision)
+        colliders = Physics2D.OverlapCircleAll(transform.position, DistanciaDeFueraDeVision);
+        foreach (var item in colliders)
         {
-
-            if (Vector3.Distance(transform.position, jugador.position) > DistanciaDeParado)
+            if (item.CompareTag("Player"))
             {
-                transform.position = Vector3.MoveTowards(transform.position, jugador.position, velocidad * Time.deltaTime);
-            }
-            else if (Vector3.Distance(transform.position, jugador.position) <= DistanciaDeParado)
-            {
-                transform.position = this.transform.position;
-                if (tiempoDeDisparo <= 0)
+                if (Vector3.Distance(transform.position, item.transform.position) <= DistanciaDeFueraDeVision)
                 {
-                    Instantiate(bala, transform.position, Quaternion.identity);
-                    tiempoDeDisparo = tiempoInicialDeDisparo;
+
+                    if (Vector3.Distance(transform.position, item.transform.position) > DistanciaDeParado)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, item.transform.position, velocidad * Time.deltaTime);
+                    }
+                    else if (Vector3.Distance(transform.position, item.transform.position) <= DistanciaDeParado)
+                    {
+                        transform.position = this.transform.position;
+                    }
                 }
+
             }
         }
+
+    }
+
+    private void OnDrawGizmosSelected()
+    {
         
     }
 }
