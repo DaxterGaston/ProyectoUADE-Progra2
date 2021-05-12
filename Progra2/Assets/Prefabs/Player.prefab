@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8636471838139571368}
   - component: {fileID: 2101969709753821028}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DirectionalLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 1460985084588520465}
   - component: {fileID: 2371152037506565546}
   - component: {fileID: 2743742323106621111}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8027845146979161716}
   - component: {fileID: 4697448358025321325}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 3863227037859596922}
   - component: {fileID: 8170421122190509667}
   - component: {fileID: 238497979632631271}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 6653274277296984271}
   - component: {fileID: 6653274277296984273}
   - component: {fileID: 6653274277296984272}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ViewCone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 118219726981963177}
   - component: {fileID: 7931565309414983394}
   - component: {fileID: 1495101192117484532}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,7 +576,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2924756587622982260}
   - component: {fileID: 6884585590399690402}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}

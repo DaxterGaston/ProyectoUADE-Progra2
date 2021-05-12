@@ -17,6 +17,7 @@ public class EnemyBehaviour : MonoBehaviour
     void Start()
     {
         tiempoDeDisparo = tiempoInicialDeDisparo;
+        Physics2D.queriesStartInColliders = false;
         
     }
 
@@ -27,18 +28,29 @@ public class EnemyBehaviour : MonoBehaviour
         colliders = Physics2D.OverlapCircleAll(transform.position, DistanciaDeFueraDeVision);
         foreach (var item in colliders)
         {
+
             if (item.CompareTag("Player"))
             {
-                if (Vector3.Distance(transform.position, item.transform.position) <= DistanciaDeFueraDeVision)
+                RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, item.transform.position, DistanciaDeFueraDeVision, 10);
+                Debug.DrawRay((Vector2)transform.position, (Vector2)item.transform.position, Color.magenta);
+                if (hitInfo)
                 {
+                    if (Vector2.Distance(transform.position, item.transform.position) <= DistanciaDeFueraDeVision) { }
+                    {
+                        if (Vector2.Distance(transform.position, item.transform.position) > DistanciaDeParado)
+                        {
 
-                    if (Vector3.Distance(transform.position, item.transform.position) > DistanciaDeParado)
-                    {
-                        transform.position = Vector3.MoveTowards(transform.position, item.transform.position, velocidad * Time.deltaTime);
-                    }
-                    else if (Vector3.Distance(transform.position, item.transform.position) <= DistanciaDeParado)
-                    {
-                        transform.position = this.transform.position;
+                            if (hitInfo.collider.CompareTag("Player"))
+                                transform.position = Vector2.MoveTowards(transform.position, item.transform.position, velocidad * Time.deltaTime);
+
+                        }
+                        else if (Vector2.Distance(transform.position, item.transform.position) <= DistanciaDeParado)
+                        {
+
+                            if (hitInfo.collider.CompareTag("Player"))
+                                transform.position = transform.position;
+
+                        }
                     }
                 }
 
