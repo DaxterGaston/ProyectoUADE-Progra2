@@ -86,12 +86,21 @@ public class ViewCone : MonoBehaviour
     private ViewCastInfo ViewCast(float angle)
     {
         Vector3 direction = DirectionFromAngle(angle);
-        RaycastHit hit;
+        direction.z = 0;
+        //RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, direction, out hit,Radius, _obstacles))
+        //if (Physics.Raycast(transform.position, direction, out hit, Radius, _obstacles))
+        //{
+        //    return new ViewCastInfo(true, hit.point, hit.distance, angle);
+        //}
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Radius, _obstacles);
+
+        if (hit)
         {
             return new ViewCastInfo(true, hit.point, hit.distance, angle);
         }
+
         return new ViewCastInfo(false, transform.position + direction * Radius, Radius, angle);
     }
 
