@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     private bool _walkingDirectionRight;
     private int _currentBullets;
     private GameObject _tabCanvas;
-    private Rigidbody _rigidbody;
+    private Rigidbody2D _rigidbody;
     private Animator _animator;
     private float _hp;
     private int _facingDirection = 1;
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider>();
         _animator = GetComponent<Animator>();
         _tabCanvas = GameObject.Find("TabbedCanvas");
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
     {
         var mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
         var direction = (mousePosition - transform.position).normalized;
-
+        
     }
 
     private void Reload() { _currentBullets = _maxBullets; }
