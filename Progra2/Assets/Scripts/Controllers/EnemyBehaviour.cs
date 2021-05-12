@@ -8,31 +8,47 @@ public class EnemyBehaviour : MonoBehaviour
     public float DistanciaDeParado;
     public float DistanciaDeFueraDeVision;
 
-    public Transform jugador;
+    public float tiempoDeDisparo;
+    public float tiempoInicialDeDisparo;
+    Collider2D[] colliders;
+    public GameObject bala;
 
     // Start is called before the first frame update
     void Start()
     {
-        jugador = GameObject.FindGameObjectWithTag("Player").transform;
+        tiempoDeDisparo = tiempoInicialDeDisparo;
         
     }
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, jugador.position) <= DistanciaDeFueraDeVision)
+        colliders = Physics2D.OverlapCircleAll(transform.position, DistanciaDeFueraDeVision);
+        foreach (var item in colliders)
         {
+            if (item.CompareTag("Player"))
+            {
+                if (Vector3.Distance(transform.position, item.transform.position) <= DistanciaDeFueraDeVision)
+                {
 
-            if (Vector3.Distance(transform.position, jugador.position) > DistanciaDeParado)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, jugador.position, velocidad * Time.deltaTime);
-            }
-            else if (Vector3.Distance(transform.position, jugador.position) <= DistanciaDeParado)
-            {
-                transform.position = this.transform.position;
+                    if (Vector3.Distance(transform.position, item.transform.position) > DistanciaDeParado)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, item.transform.position, velocidad * Time.deltaTime);
+                    }
+                    else if (Vector3.Distance(transform.position, item.transform.position) <= DistanciaDeParado)
+                    {
+                        transform.position = this.transform.position;
+                    }
+                }
+
             }
         }
+
+    }
+
+    private void OnDrawGizmosSelected()
+    {
         
     }
 }
