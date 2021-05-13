@@ -139,6 +139,7 @@ MonoBehaviour:
   _viewObstacle:
     serializedVersion: 2
     m_Bits: 256
+  _firePoint: {fileID: 0}
   velocidad: 2
   DistanciaDeParado: 3
   DistanciaDeFueraDeVision: 1.5

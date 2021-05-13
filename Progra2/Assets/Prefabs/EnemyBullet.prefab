@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 3002681933338355015}
   - component: {fileID: 4372028496544918919}
   - component: {fileID: 4728070799110507014}
-  - component: {fileID: -8462939472118193684}
+  - component: {fileID: 5039074427765166527}
   m_Layer: 0
   m_Name: EnemyBullet
-  m_TagString: Untagged
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,19 +95,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5cdba334b33c804a8967068a0cb0578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 2
-  jugador: {fileID: 1360688673854580796, guid: 7de5a5538a42b864b912b64450ac02ac, type: 3}
---- !u!136 &-8462939472118193684
-CapsuleCollider:
+  _speed: 0
+  _lifeInSeconds: 0
+  Direction: {x: 0, y: 0, z: 0}
+--- !u!61 &5039074427765166527
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5645558734541573941}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.31
-  m_Height: 0.76
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.1875, y: 0.0625}
+    newSize: {x: 0.62, y: 0.76}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.1875, y: 0.0625}
+  m_EdgeRadius: 0
