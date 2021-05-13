@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1107468847925609980}
   - component: {fileID: 1107468847925609954}
   - component: {fileID: 1107468847925609955}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ViewConeBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 1107468848222221927}
   - component: {fileID: 7392474332865453897}
   - component: {fileID: 2479374531889632080}
+  - component: {fileID: 907092394}
   m_Layer: 10
   m_Name: PlayerBody
   m_TagString: Player
@@ -107,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1107468848222221926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1547067097307234430}
@@ -220,6 +221,21 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0060455576, y: -0.0021325052}
   m_Size: {x: 0.22329937, y: 0.3644907}
   m_Direction: 0
+--- !u!114 &907092394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107468848222221926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef430dd10e287564e9422bc6adcc7bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeedModifier: 1
+  _camera: {fileID: 901105470165939089}
+  rb: {fileID: 5984062040818232378}
 --- !u!1 &2257676787334279236
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4351332764950479687}
   - component: {fileID: 1313671051245932126}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ViewCone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +332,7 @@ GameObject:
   - component: {fileID: 5958166168259332250}
   - component: {fileID: 4402616188795933649}
   - component: {fileID: 5166757026956701383}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8907409941639034695}
   - component: {fileID: 901105470165939089}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2652974052189424027}
   - component: {fileID: 5629529120723235415}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DirectionalLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +571,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5984062040818232379}
   - component: {fileID: 5984062040818232378}
-  m_Layer: 0
+  - component: {fileID: 401154158}
+  - component: {fileID: 401154160}
+  - component: {fileID: 401154161}
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -602,6 +621,54 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &401154158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5984062040818232376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb94f7437b346c14bbcd3487eed96f68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLifePoints: 100
+  maxArmorPoints: 100
+--- !u!114 &401154160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5984062040818232376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fddbcbde76013b047b3fe9dc4c860e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &401154161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5984062040818232376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e20d8bd030998d94ba9f2984fba687a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &8488877194597831423
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,7 +681,7 @@ GameObject:
   - component: {fileID: 5138007431215309090}
   - component: {fileID: 8350710066699620505}
   - component: {fileID: 8437515496036021124}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

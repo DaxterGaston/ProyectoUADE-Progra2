@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SimplePlayer : MonoBehaviour
 {
@@ -25,6 +26,15 @@ public class SimplePlayer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             lifeController.TakeDamage(20);
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene("Win");
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            SceneManager.LoadScene("Defeat");
         }
     }
 

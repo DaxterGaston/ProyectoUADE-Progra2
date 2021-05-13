@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LifeController : MonoBehaviour
 {
@@ -11,9 +12,7 @@ public class LifeController : MonoBehaviour
     private int maxArmorLife;
 
     public bool IsAlive => currentLife > 0;
-
-    public event Action OnDeath;
-
+    
     public event Action OnLifeChange;
 
     public int CurrentLife
@@ -26,7 +25,7 @@ public class LifeController : MonoBehaviour
             
             if (!IsAlive)
             {
-                OnDeath?.Invoke();
+                SceneManager.LoadScene("Defeat");
             }
 
             if (currentLife > maxLife)
