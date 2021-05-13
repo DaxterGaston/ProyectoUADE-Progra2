@@ -15,18 +15,21 @@ public class EnemyBehaviour : MonoBehaviour
 
     public float tiempoDeDisparo;
     public float tiempoInicialDeDisparo;
-    private Collider2D _collider;
     public GameObject bala;
 
-    private Vector3 _test;
-
+    private Collider2D _collider;
+    private Animator _animator;
+    private Vector3 _scale;
+    private bool _walking;
+    //True : derecha - False : izquierda
+    private bool _lookingRight;
     // Start is called before the first frame update
     void Start()
     {
         tiempoDeDisparo = tiempoInicialDeDisparo;
-        _test = transform.position;
+        _animator = GetComponent<Animator>();
+        _scale = new Vector3(1, 1, 1);
     }
-
 
     // Update is called once per frame
     void Update()
@@ -41,7 +44,7 @@ public class EnemyBehaviour : MonoBehaviour
             {
                 //TODO: Hacer algo, aca ya esta el player en rango de vision para el enemigo, a una distancia que puede verlo y no hay ninguna pared en el medio.
             }
-            
+
             //if (Vector2.Distance(transform.position, _collider.transform.position) <= DistanciaDeFueraDeVision) { }
             //{
             //    if (Vector2.Distance(transform.position, _collider.transform.position) > DistanciaDeParado)
@@ -59,12 +62,15 @@ public class EnemyBehaviour : MonoBehaviour
 
             //    }
             //}
+            UpdateAnimations();
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void UpdateAnimations()
     {
-        Gizmos.DrawWireSphere(transform.position, DistanciaDeFueraDeVision);
-        Gizmos.DrawLine((Vector2)transform.position, (Vector2)_test);
+        _animator.SetBool("Walking", _walking);
+        if (!_lookingRight) _scale.x = -1;
+        else _scale.x = 1;
+        transform.localScale = _scale;
     }
 }
