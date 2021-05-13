@@ -1069,10 +1069,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4312451103537771633, guid: cac56531e09a3e24aa3eaf3e091ce2d3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4312451103892076839, guid: cac56531e09a3e24aa3eaf3e091ce2d3,
         type: 3}
       propertyPath: m_Name
       value: Mapa2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312451103892076839, guid: cac56531e09a3e24aa3eaf3e091ce2d3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4312451103892076840, guid: cac56531e09a3e24aa3eaf3e091ce2d3,
         type: 3}
@@ -1129,6 +1139,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4766535833343168541, guid: cac56531e09a3e24aa3eaf3e091ce2d3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d8b81d6664c34654b98080875f61ce98, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cac56531e09a3e24aa3eaf3e091ce2d3, type: 3}
 --- !u!1 &1063491493

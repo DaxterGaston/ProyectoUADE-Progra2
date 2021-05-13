@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -6,67 +7,39 @@ public class PlayerController : MonoBehaviour
     #region SetUp
 
     #region Serializables
-    
+
+    [SerializeField] 
+    private float speed = 5f;
     [SerializeField]
     private int _maxBullets = 6;
     [SerializeField] 
     private Camera _camera;
     [SerializeField] 
-<<<<<<< Updated upstream
     private ViewCone _viewCone;
     [SerializeField] 
-    private Collider _collider;
-    [SerializeField] 
-    private Image _hpImage;
-    [SerializeField] 
-    private Material _hideMaterial;
-    [SerializeField] 
-    private SpriteRenderer _spriteRenderer;
-=======
     private Image _hpImage;
     [SerializeField]
+    private Rigidbody2D _rigidBody;
+    [SerializeField]
     private Transform _firePoint;
->>>>>>> Stashed changes
     [SerializeField]
     private GameObject _bullet;
 
     #endregion
 
-    private bool _isDead;
-
-    public PlayerController(bool isDead)
-    {
-        _isDead = isDead;
-    }
-
-    private bool _walkingDirectionRight;
     private int _currentBullets;
-<<<<<<< Updated upstream
-    private GameObject _tabCanvas;
-    private Rigidbody2D _rigidbody;
     private Animator _animator;
-    private float _hp;
-    private int _facingDirection = 1;
-    private float _h, _v;
-=======
-    private float _hp;
+    private int _hp;
     private Vector2 _mouse;
->>>>>>> Stashed changes
+    private Vector3 _scale;
+    private float _h, _v;
+
 
     private void Awake()
     {
-<<<<<<< Updated upstream
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _collider = GetComponent<Collider>();
         _animator = GetComponent<Animator>();
-        _tabCanvas = GameObject.Find("TabbedCanvas");
         _hpImage = GameObject.Find("HPBar").GetComponent<Image>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-
-=======
-        _bullets = new BasePool<Bullet>();
-        _hpImage = GameObject.Find("HPBar").GetComponent<Image>();
->>>>>>> Stashed changes
+        _scale = new Vector3(1, 1, 1);
         _hp = 5;
         _hpImage.fillAmount = _hp / 5;
     }
@@ -86,65 +59,46 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         GetInputs();
+        UpdateAnimations();
     }
-<<<<<<< Updated upstream
 
     private void UpdateAnimations()
     {
-        _animator.SetBool("Walking", _rigidbody.velocity.magnitude > 0.1f);
+        _animator.SetBool("Walking", _rigidBody.velocity.magnitude > 0.1f);
         _animator.SetFloat("X", _h);
+
+        if (_mouse.x > transform.position.x)
+            _scale.x = -1;
+        else
+            _scale.x = 1;
+        transform.localScale = _scale;
     }
 
-    private void FixedUpdate() { _rigidbody.velocity = new Vector2(_h * speed, _v * speed); }
+    private void FixedUpdate() { _rigidBody.velocity = new Vector2(_h * speed, _v * speed); }
 
-    private void GetInputs()
-    {
-        _h = Input.GetAxisRaw("Horizontal");
-        _v = Input.GetAxisRaw("Vertical");
-=======
-    
     private void GetInputs()
     {
         _mouse = _camera.ScreenToWorldPoint(Input.mousePosition);
->>>>>>> Stashed changes
-
-        if (_h > 0)
-            _walkingDirectionRight = true;
-        if (_h < 0)
-            _walkingDirectionRight = false;
+        _h = Input.GetAxisRaw("Horizontal");
+        _v = Input.GetAxisRaw("Vertical");
 
         if (Input.GetButtonDown("Fire1"))
         {
             if (_currentBullets <= 0)
-            {
                 Invoke("Reload", 2);
-            }
             else
             {
                 _currentBullets--;
                 Shoot();
             }
         }
-
-        if (_h != 0f || _v != 0f)
-        {
-            
-            if (_h > 0)
-            {
-                _spriteRenderer.flipX = true;
-            }
-            else if (_h < 0)
-            {
-                _spriteRenderer.flipX = false;
-            }
-        }
     }
 
     public void Shoot()
     {
-        var mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
-        var direction = (mousePosition - transform.position).normalized;
-        
+        var shootDirection = (_mouse - (Vector2)_firePoint.position).normalized;
+        var go = Instantiate(_bullet, _firePoint.position, Quaternion.identity);
+        //go.GetComponent<Bullet>().Direction = shootDirection;
     }
 
     private void Reload() { _currentBullets = _maxBullets; }
@@ -156,16 +110,13 @@ public class PlayerController : MonoBehaviour
 
         if (_hp <= 0)
         {
-            _isDead = true;
-            _viewCone.Angle = 360f;
+            Death();
         }
     }
 
     private void Death()
     {
-        var color = _spriteRenderer.color;
-        _spriteRenderer.color = new Color(color.r, color.g, color.b, 0.5f);
-        _collider.enabled = false;
+        throw new NotImplementedException();
     }
 
     public void RestoreHealth(int amount)
