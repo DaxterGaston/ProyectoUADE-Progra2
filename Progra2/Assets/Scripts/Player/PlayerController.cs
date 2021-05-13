@@ -6,14 +6,13 @@ public class PlayerController : MonoBehaviour
     #region SetUp
 
     #region Serializables
-
-    [SerializeField] 
-    private float speed = 5f;
+    
     [SerializeField]
     private int _maxBullets = 6;
     [SerializeField] 
     private Camera _camera;
     [SerializeField] 
+<<<<<<< Updated upstream
     private ViewCone _viewCone;
     [SerializeField] 
     private Collider _collider;
@@ -23,6 +22,11 @@ public class PlayerController : MonoBehaviour
     private Material _hideMaterial;
     [SerializeField] 
     private SpriteRenderer _spriteRenderer;
+=======
+    private Image _hpImage;
+    [SerializeField]
+    private Transform _firePoint;
+>>>>>>> Stashed changes
     [SerializeField]
     private GameObject _bullet;
 
@@ -37,15 +41,21 @@ public class PlayerController : MonoBehaviour
 
     private bool _walkingDirectionRight;
     private int _currentBullets;
+<<<<<<< Updated upstream
     private GameObject _tabCanvas;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private float _hp;
     private int _facingDirection = 1;
     private float _h, _v;
+=======
+    private float _hp;
+    private Vector2 _mouse;
+>>>>>>> Stashed changes
 
     private void Awake()
     {
+<<<<<<< Updated upstream
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider>();
         _animator = GetComponent<Animator>();
@@ -53,6 +63,10 @@ public class PlayerController : MonoBehaviour
         _hpImage = GameObject.Find("HPBar").GetComponent<Image>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
+=======
+        _bullets = new BasePool<Bullet>();
+        _hpImage = GameObject.Find("HPBar").GetComponent<Image>();
+>>>>>>> Stashed changes
         _hp = 5;
         _hpImage.fillAmount = _hp / 5;
     }
@@ -72,8 +86,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         GetInputs();
-        UpdateAnimations();
     }
+<<<<<<< Updated upstream
 
     private void UpdateAnimations()
     {
@@ -87,6 +101,12 @@ public class PlayerController : MonoBehaviour
     {
         _h = Input.GetAxisRaw("Horizontal");
         _v = Input.GetAxisRaw("Vertical");
+=======
+    
+    private void GetInputs()
+    {
+        _mouse = _camera.ScreenToWorldPoint(Input.mousePosition);
+>>>>>>> Stashed changes
 
         if (_h > 0)
             _walkingDirectionRight = true;
