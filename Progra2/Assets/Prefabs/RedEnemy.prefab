@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3745963360225543805}
   m_Layer: 0
   m_Name: RedEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,9 +132,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3876da8a2aa238429521c20bf585f10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  _viewObstacle:
+    serializedVersion: 2
+    m_Bits: 256
   velocidad: 2
   DistanciaDeParado: 3
-  DistanciaDeFueraDeVision: 5
+  DistanciaDeFueraDeVision: 1.5
   tiempoDeDisparo: 0
   tiempoInicialDeDisparo: 5
   bala: {fileID: 5645558734541573941, guid: 9ca888ca0f3da2749a3d751769fcb5b2, type: 3}
