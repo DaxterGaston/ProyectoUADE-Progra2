@@ -16,6 +16,7 @@ public class EnemyBehaviour : MonoBehaviour
     public float tiempoDeDisparo;
     public float tiempoInicialDeDisparo;
     public GameObject bala;
+    public int hp;
 
     private Collider2D _collider;
     private Animator _animator;
@@ -29,6 +30,7 @@ public class EnemyBehaviour : MonoBehaviour
         tiempoDeDisparo = tiempoInicialDeDisparo;
         _animator = GetComponent<Animator>();
         _scale = new Vector3(1, 1, 1);
+        Physics2D.queriesStartInColliders = false;
     }
 
     // Update is called once per frame
@@ -37,12 +39,45 @@ public class EnemyBehaviour : MonoBehaviour
         _collider = Physics2D.OverlapCircle(transform.position, DistanciaDeFueraDeVision, _playerLayer);
         if (_collider)
         {
+            print(_collider.tag);
             RaycastHit2D hit = Physics2D.Raycast(transform.position, _collider.transform.position, Vector2.Distance(transform.position, _collider.transform.position), _viewObstacle);
             Debug.DrawLine((Vector2)transform.position, (Vector2)_collider.transform.position, Color.magenta);
 
             if (!hit)
             {
                 //TODO: Hacer algo, aca ya esta el player en rango de vision para el enemigo, a una distancia que puede verlo y no hay ninguna pared en el medio.
+                if (Vector2.Distance(transform.position, _collider.transform.position) <= DistanciaDeFueraDeVision)
+                {
+                    if (Vector2.Distance(transform.position, _collider.transform.position) > DistanciaDeParado)
+                    {
+                        transform.position = Vector2.MoveTowards(transform.position, _collider.transform.position, velocidad * Time.deltaTime);
+                        tiempoDeDisparo = tiempoInicialDeDisparo;
+                        _walking = true;
+                        if (transform.position.x <= _collider.transform.position.x)
+                        {
+                            _lookingRight = true;
+                        }
+                        else
+                            _lookingRight = false;
+                    }
+                    else if (Vector2.Distance(transform.position, _collider.transform.position) <= DistanciaDeParado)
+                    {
+                        _walking = false;
+                        if (transform.position.x <= _collider.transform.position.x)
+                        {
+                            _lookingRight = true;
+                        }
+                        else
+                            _lookingRight = false;
+                        transform.position = transform.position;
+                        tiempoDeDisparo -= Time.deltaTime;
+                        if (tiempoDeDisparo <= 0)
+                        {
+                            //TODO: Disparar hacia donde apunta el raycast
+                            tiempoDeDisparo = tiempoInicialDeDisparo;
+                        }
+                    }
+                }
             }
 
             //if (Vector2.Distance(transform.position, _collider.transform.position) <= DistanciaDeFueraDeVision) { }
@@ -62,7 +97,18 @@ public class EnemyBehaviour : MonoBehaviour
 
             //    }
             //}
-            UpdateAnimations();
+          
+        }
+        UpdateAnimations();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            hp--;
+            if (hp <= 0) //Que hacer cuando sea golpeado por una bala
+                Destroy(gameObject);
         }
     }
 
