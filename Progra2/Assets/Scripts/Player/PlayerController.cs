@@ -29,16 +29,14 @@ public class PlayerController : MonoBehaviour
 
     private int _currentBullets;
     private Animator _animator;
-    private float _hp;
+    private int _hp;
     private Vector2 _mouse;
     private Vector3 _scale;
     private float _h, _v;
 
-    private BasePool<Bullet> _bullets;
 
     private void Awake()
     {
-        _bullets = new BasePool<Bullet>();
         _animator = GetComponent<Animator>();
         _hpImage = GameObject.Find("HPBar").GetComponent<Image>();
         _scale = new Vector3(1, 1, 1);
