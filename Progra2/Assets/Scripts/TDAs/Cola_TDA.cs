@@ -19,7 +19,7 @@ namespace TDAs
                 a[i + 1] = a[i];
             }
             a[0] = x;
-
+            
             indice++;
         }
 

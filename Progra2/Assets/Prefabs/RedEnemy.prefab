@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4210772522201629682}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 8238789628290389445}
   - component: {fileID: 8238789628290389444}
   - component: {fileID: 8459787916037189328}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RedEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -171,11 +171,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _firePoint: {fileID: 4210772522201629682}
-  velocidad: 2
-  DistanciaDeParado: 3
-  DistanciaDeFueraDeVision: 1.5
+  velocidad: 0.8
+  DistanciaDeParado: 0.7
+  DistanciaDeFueraDeVision: 1
   tiempoDeDisparo: 0
-  tiempoInicialDeDisparo: 5
+  tiempoInicialDeDisparo: 0.5
   bala: {fileID: 1692720124119892159, guid: 0626f9746e5db684cad80fc43b47582e, type: 3}
   hp: 1
 --- !u!50 &8459787916037189328
@@ -198,4 +198,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

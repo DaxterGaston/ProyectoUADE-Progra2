@@ -27,4 +27,12 @@ public class SimplePlayer : MonoBehaviour
             lifeController.TakeDamage(20);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            lifeController.TakeDamage(20);
+        }
+    }
 }

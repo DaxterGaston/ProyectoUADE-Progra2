@@ -9,9 +9,14 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/StackTest/SpawnController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/StackTest/MovementController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/TDAs/Cola_TDA.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Utilities/BasePool.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/StackTest/SpawnController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/StackTest/SimplePlayer.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/MenuScripts/EndGame.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/MenuScripts/MainMenuManager.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1rbBcXQVWYxSqYwDPo917JmmrXt" />
@@ -20,11 +25,13 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34991798" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
-  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
@@ -58,6 +65,8 @@
       <workItem from="1620590416063" duration="2030000" />
       <workItem from="1620834859487" duration="7915000" />
       <workItem from="1620934402967" duration="418000" />
+      <workItem from="1620938828574" duration="2872000" />
+      <workItem from="1620941967510" duration="512000" />
     </task>
     <servers />
   </component>

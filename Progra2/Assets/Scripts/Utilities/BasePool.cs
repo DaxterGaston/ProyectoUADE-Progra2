@@ -8,17 +8,20 @@ public class BasePool<T> where T : MonoBehaviour
     /// TODO: Almacenar objetos con enabled = false.
     /// Son los que estarian disponibles para uso.
     /// </summary>
-    private Cola_TDA<T> Avaliable = new Cola_TDA<T>();
+    private Cola_TDA<T> Avaliable;
 
     /// <summary>
     /// TODO: Almacenar objetos con enabled = true.
     /// Son los que estarian en uso.
     /// </summary>
-    private Cola_TDA<T> Using = new Cola_TDA<T>();
+    private Cola_TDA<T> Using;
 
     public int Amount { get; private set; }
 
-    public int AvaliableAmount { get { return Avaliable.Cantidad; } }
+    public int AvaliableAmount
+    {
+        get { return Avaliable.Cantidad; }
+    }
 
     /// <summary>
     /// Pool generico.
@@ -28,9 +31,12 @@ public class BasePool<T> where T : MonoBehaviour
     /// </param>
     public void CreateInitialInstances(List<T> inicial)
     {
+        Avaliable = new Cola_TDA<T>();
+        Using = new Cola_TDA<T>();
         Amount = inicial.Count;
-        foreach (var item in inicial)
-            Avaliable.Acolar(item);
+        Avaliable.InicializarCola(Amount);
+        Using.InicializarCola(Amount);
+        foreach (var item in inicial) Avaliable.Acolar(item);
     }
 
     public List<T> GetAll()
@@ -41,11 +47,13 @@ public class BasePool<T> where T : MonoBehaviour
             l.Add(Avaliable.Primero());
             Avaliable.Desacolar();
         }
+
         return l;
     }
 
     public T Get()
     {
+        if (Avaliable.ColaVacia()) return default(T);
         if (AvaliableAmount > 0)
         {
             T e;
@@ -55,6 +63,7 @@ public class BasePool<T> where T : MonoBehaviour
             Using.Acolar(e);
             return e;
         }
+
         return default(T);
     }
 
@@ -65,6 +74,7 @@ public class BasePool<T> where T : MonoBehaviour
             obj = null;
             return;
         }
+
         if (Using.Cantidad > 0)
         {
             var e = Using.Primero();
@@ -78,5 +88,4 @@ public class BasePool<T> where T : MonoBehaviour
     {
         return Avaliable.Cantidad > 0;
     }
-
 }

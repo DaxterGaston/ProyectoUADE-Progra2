@@ -528,8 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5133055858ca7924daa341ba6115885f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyRespawnTimerCooldown: 3
-  enemyArray: []
+  enemyRespawnTimerCooldown: 1
   spawnEnemyPoints:
   - {fileID: 1830837288}
   - {fileID: 1611166711}
@@ -553,7 +552,10 @@ MonoBehaviour:
   - {fileID: 1337769438}
   spawnerEnemyLayerCheck:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
+  enemyPrefab: {fileID: 8238789628290389441, guid: 787dcb1cc477d8d4c98876d57930d140,
+    type: 3}
+  enemyAmount: 10
   itemRespawnTimerCooldown: 3
   maxNumberOfItems: 4
   itemArray:
@@ -1765,7 +1767,7 @@ PrefabInstance:
     - target: {fileID: 7392474332865453897, guid: e60e8d3307d58f341987c6bf179fd435,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8488877194597831423, guid: e60e8d3307d58f341987c6bf179fd435,
         type: 3}
