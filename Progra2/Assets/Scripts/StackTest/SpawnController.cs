@@ -12,7 +12,7 @@ public class SpawnController : MonoBehaviour
     private float currentEnemyRespawnTimer;
     private int lastEnemySpawnIndex; // Ultimo punto de spawn
     public LayerMask spawnerEnemyLayerCheck; // Layer utilizada por los enemigos
-    public float spawnerEnemyRadiusCheck; // Radio que checkea para spawnear
+    private float spawnerEnemyRadiusCheck = 0.1f; // Radio que checkea para spawnear
     #endregion
 
     #region ItemSpawning
