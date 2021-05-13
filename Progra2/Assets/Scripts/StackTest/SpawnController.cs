@@ -13,14 +13,38 @@ public class SpawnController : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = new SpawnController();
-            }
             return _instance;
         } 
     }
 
+    private bool dontDestroyOnLoad = true;
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+
+            if (dontDestroyOnLoad)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        if (SceneManager.GetActiveScene().name == "Level")
+        {
+            currentLevel = 1;
+        }
+
+        if (SceneManager.GetActiveScene().name == "Level2")
+        {
+            currentLevel = 2;
+        }
+    }
+
+    private int currentLevel;
     private int KilledAmount;
     #region EnemySpawning
     [SerializeField] private float enemyRespawnTimerCooldown = 3f; // Tiempo maximo entre cada enemigo
@@ -72,9 +96,18 @@ public class SpawnController : MonoBehaviour
             }
         }
 
-        if (KilledAmount == 1)
+        if (KilledAmount == 5)
         {
-            SceneManager.LoadScene("Win");
+            switch (currentLevel)
+            {
+                case 1:
+                    SceneManager.LoadScene("Level2");
+                    break;
+                case 2:
+                    SceneManager.LoadScene("Win");
+                    break;
+            }
+            Destroy(gameObject);
         }
     }
 
