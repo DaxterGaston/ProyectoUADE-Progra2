@@ -17,6 +17,7 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/StackTest/SimplePlayer.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/MenuScripts/EndGame.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/MenuScripts/MainMenuManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/StackTest/LifeController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1rbBcXQVWYxSqYwDPo917JmmrXt" />
@@ -66,7 +67,7 @@
       <workItem from="1620834859487" duration="7915000" />
       <workItem from="1620934402967" duration="418000" />
       <workItem from="1620938828574" duration="2872000" />
-      <workItem from="1620941967510" duration="512000" />
+      <workItem from="1620941967510" duration="1215000" />
     </task>
     <servers />
   </component>
