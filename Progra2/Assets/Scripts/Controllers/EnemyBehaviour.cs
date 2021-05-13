@@ -8,6 +8,8 @@ public class EnemyBehaviour : MonoBehaviour
     private LayerMask _playerLayer;
     [SerializeField]
     private LayerMask _viewObstacle;
+    [SerializeField]
+    private Transform _firePoint;
 
     public float velocidad;
     public float DistanciaDeParado;
@@ -73,7 +75,10 @@ public class EnemyBehaviour : MonoBehaviour
                         tiempoDeDisparo -= Time.deltaTime;
                         if (tiempoDeDisparo <= 0)
                         {
-                            //TODO: Disparar hacia donde apunta el raycast
+                            print("Disparo");
+                            var go = Instantiate(bala, _firePoint.position, Quaternion.identity);
+                            go.GetComponent<Bullet>().Direction = (_collider.transform.position - transform.position).normalized;
+
                             tiempoDeDisparo = tiempoInicialDeDisparo;
                         }
                     }
