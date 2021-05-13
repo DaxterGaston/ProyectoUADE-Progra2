@@ -26,6 +26,7 @@ public class EnemyBehaviour : MonoBehaviour
     private bool _walking;
     //True : derecha - False : izquierda
     private bool _lookingRight;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -113,7 +114,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             hp--;
             if (hp <= 0) //Que hacer cuando sea golpeado por una bala
-                Destroy(gameObject);
+                SpawnController.Instance.StoreEnemy(this);
         }
     }
 

@@ -1,10 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpawnController : MonoBehaviour
 {
+    private SpawnController()
+    {
+        Start();
+    }
+    private static SpawnController _instance;
+    public static SpawnController Instance 
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new SpawnController();
+            }
+            return _instance;
+        } 
+    }
+
+    private int KilledAmount;
     #region EnemySpawning
     [SerializeField] private float enemyRespawnTimerCooldown = 3f; // Tiempo maximo entre cada enemigo
     private BasePool<EnemyBehaviour> enemyArray; // Array de objetos a spawnear
@@ -54,8 +71,19 @@ public class SpawnController : MonoBehaviour
                 SpawnItemOverlapCheck();
             }
         }
+
+        if (KilledAmount == 1)
+        {
+            SceneManager.LoadScene("Win");
+        }
     }
-    
+
+    public void StoreEnemy(EnemyBehaviour e)
+    {
+        KilledAmount++;
+        enemyArray.Store(e);
+    }
+
     public void ReduceSpawnedItemCount()
     {
         currentNumberOfItems--;
