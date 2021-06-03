@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
         _currentBullets = _maxBullets;
         _scale = transform.localScale;
         _initialLocalScale = transform.localScale;
+        Debug.Log(transform.localScale);
     }
     
     #endregion
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
     {
         GetInputs();
         UpdateAnimations();
+        Debug.Log(transform.localScale);
     }
 
     private void UpdateAnimations()
