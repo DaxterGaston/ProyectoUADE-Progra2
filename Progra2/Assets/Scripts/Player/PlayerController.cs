@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private int _hp;
     private Vector2 _mouse;
     private Vector3 _scale;
+    private Vector3 _initialLocalScale;
     private float _h, _v;
 
 
@@ -39,7 +40,6 @@ public class PlayerController : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _hpImage = GameObject.Find("HPBar").GetComponent<Image>();
-        _scale = new Vector3(1, 1, 1);
         _hp = 5;
         _hpImage.fillAmount = _hp / 5;
     }
@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _currentBullets = _maxBullets;
+        _scale = transform.localScale;
+        _initialLocalScale = transform.localScale;
     }
     
     #endregion
@@ -68,9 +70,9 @@ public class PlayerController : MonoBehaviour
         _animator.SetFloat("X", _h);
 
         if (_mouse.x > transform.position.x)
-            _scale.x = -1;
+            _scale.x = -_initialLocalScale.x;
         else
-            _scale.x = 1;
+            _scale.x = _initialLocalScale.x;
         transform.localScale = _scale;
     }
 
