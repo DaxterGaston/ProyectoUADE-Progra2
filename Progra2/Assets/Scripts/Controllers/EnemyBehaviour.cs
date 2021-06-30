@@ -19,6 +19,9 @@ public class EnemyBehaviour : MonoBehaviour
     public float tiempoInicialDeDisparo;
     public GameObject bala;
     public int hp;
+    public Transform nodePosition; //Position del siguiente nodo a moverse
+    public Transform initialPosition; //Position inicial (Solo para testeo, despues borrar)
+
 
     private Collider2D _collider;
     private Animator _animator;
@@ -26,6 +29,8 @@ public class EnemyBehaviour : MonoBehaviour
     private bool _walking;
     //True : derecha - False : izquierda
     private bool _lookingRight;
+    private bool _pathDone;
+        
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +39,7 @@ public class EnemyBehaviour : MonoBehaviour
         _animator = GetComponent<Animator>();
         _scale = new Vector3(1, 1, 1);
         Physics2D.queriesStartInColliders = false;
+        _pathDone = false;
     }
 
     // Update is called once per frame
@@ -104,6 +110,24 @@ public class EnemyBehaviour : MonoBehaviour
             //    }
             //}
           
+        }
+        if (!_pathDone)
+        {   
+            transform.position = Vector2.MoveTowards(transform.position, nodePosition.position, velocidad * Time.deltaTime); //Moverse al nodo
+            if(transform.position == nodePosition.position)
+            {
+                _pathDone = true; //al llegar, cambiar flag
+            }
+        }
+        else
+        {
+            //TODO: Cambiar esto, y hacer que en vez de moverse de uno al otro, que cambie el valor del nodoPosition por el siguiente nodo
+            //A moverse, no se como hacer un array en el ui
+            transform.position = Vector2.MoveTowards(transform.position, initialPosition.position, velocidad * Time.deltaTime);
+            if(transform.position == initialPosition.position)
+            {
+                _pathDone = false;
+            }
         }
         UpdateAnimations();
     }
