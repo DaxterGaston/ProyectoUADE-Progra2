@@ -78,7 +78,12 @@ public class PlayerController : MonoBehaviour
         transform.localScale = _scale;
     }
 
-    private void FixedUpdate() { _rigidBody.velocity = new Vector2(_h * speed, _v * speed); }
+    private void FixedUpdate() 
+    {
+        print(($"h: {1} v: {2} speed: {3}", _h, _v, speed));
+        _rigidBody.velocity = new Vector2(_h * speed, _v * speed);
+        print("rb: " + _rigidBody.velocity);
+    }
 
     private void GetInputs()
     {
