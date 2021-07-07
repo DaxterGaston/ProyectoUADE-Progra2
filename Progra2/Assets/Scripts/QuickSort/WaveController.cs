@@ -2,59 +2,33 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class WaveController : MonoBehaviour
 {
-    /*
-    #region WaveControlling
-
-    // TODO: en spawn controller agregar seleccion entre Default y Waves
-    public enum EnemySpawningMethod
-    {
-        QueuePool,
-        Waves
-    };
-
-    [Tooltip("Metodo que utiliza para spawnear enemigos")]
-    public EnemySpawningMethod enemySpawnMethod;
-    
-    #endregion
-    */
-    
     private WaveXMLCreator xml;
     private XmlDocument waveXml;
     private int[] enemyDistribution = new int[3];
-    private Dictionary<int, GameObject> waveReferenceDic = new Dictionary<int, GameObject>();
-    private Queue<GameObject> waveQueue = new Queue<GameObject>();
+    private Dictionary<int, DijkstraPathing> waveReferenceDic = new Dictionary<int, DijkstraPathing>();
+    private Queue<DijkstraPathing> waveQueue = new Queue<DijkstraPathing>();
+
+    public bool IsQueueEmpty => waveQueue.Count <= 0;
+
     [SerializeField][Tooltip("Asignar el prefab del enemigo 'rojo'")]
-    private GameObject redEnemyPrefab;
+    private DijkstraPathing redEnemyPrefab;
     [SerializeField][Tooltip("Asignar el prefab del enemigo 'verde'")]
-    private GameObject greenEnemyPrefab;
+    private DijkstraPathing greenEnemyPrefab;
     [SerializeField][Tooltip("Asignar el prefab del enemigo 'azul'")]
-    private GameObject blueEnemyPrefab;
+    private DijkstraPathing blueEnemyPrefab;
     
 
-    private void Start()
+    private void Awake()
     {
         // Guardo la referencia del script que crea el archivo xml
         xml = GetComponent<WaveXMLCreator>();
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            LoadXml(4);
-            WaveSetup(1,4);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            WaveSpawn(transform.parent);
-        }
-    }
-
+    
     public void LoadXml(int waveNumber)
     {
         // Creo el archivo xml
@@ -135,12 +109,14 @@ public class WaveController : MonoBehaviour
         }
     }
 
-    public void WaveSpawn(Transform transform)
+    public void WaveSpawn(Transform transf)
     {
         // Si no hay enemigos en la queue no continuo
         if (waveQueue.Count <= 0) return;
         // Instancio el primer objeto de la queue
-        Instantiate(waveQueue.Peek(),transform);
+        var spawned = Instantiate(waveQueue.Peek(),transf.position,transf.rotation);
+        // Guardo su spawn inicial
+        spawned.SetSpawnPoint(transf);
         // Lo saco de la queue
         waveQueue.Dequeue();
     }

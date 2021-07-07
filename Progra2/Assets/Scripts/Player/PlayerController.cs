@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
         _currentBullets = _maxBullets;
         _scale = transform.localScale;
         _initialLocalScale = transform.localScale;
-        Debug.Log(transform.localScale);
     }
     
     #endregion
@@ -63,7 +62,6 @@ public class PlayerController : MonoBehaviour
     {
         GetInputs();
         UpdateAnimations();
-        Debug.Log(transform.localScale);
     }
 
     private void UpdateAnimations()
@@ -80,9 +78,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        print(($"h: {1} v: {2} speed: {3}", _h, _v, speed));
+        //print(($"h: {1} v: {2} speed: {3}", _h, _v, speed));
         _rigidBody.velocity = new Vector2(_h * speed, _v * speed);
-        print("rb: " + _rigidBody.velocity);
+        //print("rb: " + _rigidBody.velocity);
     }
 
     private void GetInputs()

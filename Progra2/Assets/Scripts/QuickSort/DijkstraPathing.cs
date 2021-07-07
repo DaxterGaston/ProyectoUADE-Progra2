@@ -2,27 +2,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DijkstraPathing : MonoBehaviour
 {
-    [SerializeField] private Transform[] pathPoints;
+    private Transform[] pathPoints;
     private GrafoMA grafoMa;
     private Queue<Transform> activePathing = new Queue<Transform>();
     private Transform pathStart;
     private Transform pathCurrent;
-    private Transform pathNext;
-    private bool isAtNextPoint;
+    private Transform pathLast;
+    private bool isAtPoint;
     [SerializeField] private int pathEnemyIndex;
     [SerializeField] private float moveSpeed = 5f;
 
-    private void Start()
+    public void SetSpawnPoint(Transform transf)
     {
-        GraphCreation();
         // Cambiar a la posicion donde spawnea
-        pathCurrent = pathPoints[0];
+        pathCurrent = transf;
         transform.position = pathCurrent.position;
-        pathNext = pathCurrent;
+        pathLast = pathCurrent;
+        Startup();
+    }
+    private void Startup()
+    {
+        var arrLength = SpawnController.Instance.dijkstraPathPoints.Length;
+        pathPoints = new Transform[arrLength];
+        Array.Copy(SpawnController.Instance.dijkstraPathPoints,pathPoints,arrLength);
+        GraphCreation();
+        RunDijkstra();
+        NodeUpdate();
     }
 
     private void Update()
@@ -36,6 +44,7 @@ public class DijkstraPathing : MonoBehaviour
         {
             NodeUpdate();
         }
+        print(pathCurrent);
         DijkstraMove();
     }
 
@@ -112,6 +121,7 @@ public class DijkstraPathing : MonoBehaviour
     private void UpdateCurrentRoute()
     {
         var path = Array.ConvertAll(AlgDijkstra.nodos[pathEnemyIndex].Split(','), Convert.ToInt32);
+        print(AlgDijkstra.nodos[pathEnemyIndex]);
         activePathing.Clear();
         for (int i = 0; i < path.Length; i++)
         {
@@ -121,37 +131,51 @@ public class DijkstraPathing : MonoBehaviour
 
     private void DijkstraMove()
     {
-        var pos = transform.position;
-        if (!isAtNextPoint)
+        if (!isAtPoint)
         {
-            // Moverse al nodo
-            transform.position = Vector2.MoveTowards(pos, pathCurrent.position, moveSpeed * Time.deltaTime);
+            transform.position =Vector2.MoveTowards(transform.position, pathCurrent.position, moveSpeed * Time.deltaTime);
             if (transform.position == pathCurrent.position)
             {
-                isAtNextPoint = true;
+                isAtPoint = true;
             }
         }
-        
-        if (isAtNextPoint)
+
+        if (isAtPoint)
         {
-            transform.position = Vector2.MoveTowards(pos, pathNext.position, moveSpeed * Time.deltaTime);
-            if (transform.position == pathNext.position)
-            {
-                isAtNextPoint = false;
-            }
+            NodeUpdate();
         }
+        // if (!isAtNextPoint)
+        // {
+        //     // Moverse al nodo
+        //     transform.position = Vector2.MoveTowards(transform.position, pathCurrent.position, moveSpeed * Time.deltaTime);
+        //     if (transform.position == pathCurrent.position)
+        //     {
+        //         isAtNextPoint = true;
+        //     }
+        // }
+        //
+        // if (isAtNextPoint)
+        // {
+        //     transform.position = Vector2.MoveTowards(transform.position, pathNext.position, moveSpeed * Time.deltaTime);
+        //     if (transform.position == pathNext.position)
+        //     {
+        //         isAtNextPoint = false;
+        //         NodeUpdate();
+        //     }
+        // }
     }
 
     private void NodeUpdate()
     {
         if (activePathing.Count <= 0)
         {
-            pathNext = transform;
+            pathLast = transform;
+            pathCurrent = transform;
             return;
         }
-        pathNext = activePathing.Peek();
-        pathCurrent = pathNext;
+        pathCurrent = activePathing.Peek();
         activePathing.Dequeue();
+        isAtPoint = false;
     }
 
     private Transform IndexToTransform(int index)
