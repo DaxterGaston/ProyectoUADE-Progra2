@@ -114,9 +114,11 @@ public class EnemyBehaviour : MonoBehaviour
         if (!_pathDone)
         {   
             transform.position = Vector2.MoveTowards(transform.position, nodePosition.position, velocidad * Time.deltaTime); //Moverse al nodo
+            _walking = true;
             if(transform.position == nodePosition.position)
             {
                 _pathDone = true; //al llegar, cambiar flag
+                _walking = false;
             }
         }
         else
@@ -124,9 +126,11 @@ public class EnemyBehaviour : MonoBehaviour
             //TODO: Cambiar esto, y hacer que en vez de moverse de uno al otro, que cambie el valor del nodoPosition por el siguiente nodo
             //A moverse, no se como hacer un array en el ui
             transform.position = Vector2.MoveTowards(transform.position, initialPosition.position, velocidad * Time.deltaTime);
+            _walking = true;
             if(transform.position == initialPosition.position)
             {
                 _pathDone = false;
+                _walking = false;
             }
         }
         UpdateAnimations();
@@ -144,6 +148,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void UpdateAnimations()
     {
+        print(_walking);
         _animator.SetBool("Walking", _walking);
         if (!_lookingRight) _scale.x = -1;
         else _scale.x = 1;
