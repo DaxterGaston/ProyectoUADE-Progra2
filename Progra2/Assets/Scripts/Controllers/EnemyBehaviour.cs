@@ -1,15 +1,23 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+    #region Serializes
+
     [SerializeField]
     private LayerMask _playerLayer;
     [SerializeField]
     private LayerMask _viewObstacle;
     [SerializeField]
     private Transform _firePoint;
+
+    #endregion
+
+    #region Miembros Publicos
 
     public float velocidad;
     public float DistanciaDeParado;
@@ -22,6 +30,9 @@ public class EnemyBehaviour : MonoBehaviour
     public Transform nodePosition; //Position del siguiente nodo a moverse
     public Transform initialPosition; //Position inicial (Solo para testeo, despues borrar)
 
+    #endregion
+
+    #region Miembros Privados
 
     private Collider2D _collider;
     private Animator _animator;
@@ -30,11 +41,21 @@ public class EnemyBehaviour : MonoBehaviour
     //True : derecha - False : izquierda
     private bool _lookingRight;
     private bool _pathDone;
-        
 
-    // Start is called before the first frame update
+    [SerializeField]
+    private int _milisecondsToTeleport = 2;
+    private Stopwatch _sw;
+    private TimeSpan _ts;
+    
+    #endregion
+
+    public bool CanTeleport { get; private set; }
+
     void Start()
     {
+        _sw = new Stopwatch();
+        _ts = new TimeSpan(0, 0, 0, _milisecondsToTeleport);
+
         tiempoDeDisparo = tiempoInicialDeDisparo;
         _animator = GetComponent<Animator>();
         _scale = new Vector3(1, 1, 1);
@@ -42,7 +63,6 @@ public class EnemyBehaviour : MonoBehaviour
         _pathDone = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         _collider = Physics2D.OverlapCircle(transform.position, DistanciaDeFueraDeVision, _playerLayer);
@@ -50,7 +70,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             print(_collider.tag);
             RaycastHit2D hit = Physics2D.Raycast(transform.position, _collider.transform.position, Vector2.Distance(transform.position, _collider.transform.position), _viewObstacle);
-            Debug.DrawLine((Vector2)transform.position, (Vector2)_collider.transform.position, Color.magenta);
+            UnityEngine.Debug.DrawLine((Vector2)transform.position, (Vector2)_collider.transform.position, Color.magenta);
 
             if (!hit)
             {
@@ -134,6 +154,8 @@ public class EnemyBehaviour : MonoBehaviour
         //     }
         // }
         UpdateAnimations();
+        if (!CanTeleport)
+            if (_sw.Elapsed >= _ts) CanTeleport = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -153,5 +175,15 @@ public class EnemyBehaviour : MonoBehaviour
         if (!_lookingRight) _scale.x = -1;
         else _scale.x = 1;
         transform.localScale = _scale;
+    }
+
+    public void Teleport(Vector3 position)
+    {
+        if (CanTeleport)
+        {
+            transform.position = position;
+            _sw.Start();
+            CanTeleport = false;
+        }
     }
 }

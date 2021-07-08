@@ -9,6 +9,7 @@ TagManager:
   - PickUp
   - Bullet
   - EnemyBullet
+  - Teleport
   layers:
   - Default
   - TransparentFX
