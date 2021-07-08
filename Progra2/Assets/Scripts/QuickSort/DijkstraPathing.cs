@@ -1,63 +1,67 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DijkstraPathing : MonoBehaviour
 {
-    private Transform[] pathPoints;
-    private GrafoMA grafoMa;
-    private Queue<Transform> activePathing = new Queue<Transform>();
-    private Transform pathStart;
-    private Transform pathCurrent;
-    private Transform pathLast;
-    private bool isAtPoint;
-    [SerializeField] private int pathEnemyIndex;
-    [SerializeField] private float moveSpeed = 5f;
+    private Transform[] pathPoints; // Array con todos los puntos del grafo
+    private GrafoMA grafoMa; // Matriz de adyacencia donde se guardan todos los datos para utilizar en Dijkstra
+    private Queue<Transform> activePathing = new Queue<Transform>(); // Lista de puntos que tiene que recorrer
+    private Transform pathCurrent; // Punto al que tiene que llegar 
+    private Transform pathLast; // Quizas se usa para algo despues (si patrulla sobre una camino especifico)
+    private bool isAtPoint; // Llegue al punto que me corresponde?
+    [SerializeField] private int pathEnemyIndex; // El punto final de la ruta
+    [SerializeField] private float moveSpeed = 5f; // Velocidad de movimiento del objeto
 
     public void SetSpawnPoint(Transform transf)
     {
-        // Cambiar a la posicion donde spawnea
+        // Guardo la posicion
         pathCurrent = transf;
+        // Aplico la posicion
         transform.position = pathCurrent.position;
+        // Guarda la posicion anterior
         pathLast = pathCurrent;
+        // Inicializa
         Startup();
     }
+
     private void Startup()
     {
+        // Var aux para hacer el array en el que voy a copiar
         var arrLength = SpawnController.Instance.dijkstraPathPoints.Length;
+        // Genero el array con el tamaño 
         pathPoints = new Transform[arrLength];
-        Array.Copy(SpawnController.Instance.dijkstraPathPoints,pathPoints,arrLength);
+        // Copio el array para poder realizar todas las funciones del script
+        Array.Copy(SpawnController.Instance.dijkstraPathPoints, pathPoints, arrLength);
+        // Genera el grafo con sus aristas y pesos
         GraphCreation();
+        // Usa el algoritmo de dijkstra sobre el grafo generado anteriormente
         RunDijkstra();
+        // Actualiza la siguiente posicion a la que tiene que ir
         NodeUpdate();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            RunDijkstra();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            NodeUpdate();
-        }
-        print(pathCurrent);
+        // Movimiento utilizando el camino generado por dijkstra
         DijkstraMove();
     }
 
     private void GraphCreation()
     {
+        // Tamaño que va a tener la matriz de adyacencia
         GrafoMA.n = pathPoints.Length;
+        // Crea una nueva matriz
         grafoMa = new GrafoMA();
+        // Inicializa los valores iniciales de la matriz
         grafoMa.InicializarGrafo();
+        // Agrega los vertices a la matriz
         for (int i = 0; i < pathPoints.Length; i++)
         {
             grafoMa.AgregarVertice(int.Parse(pathPoints[i].name));
         }
 
+        // Declara el origen de las aristas
         int[] aristas_origen =
         {
             0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 10, 10, 10, 10,
@@ -79,6 +83,7 @@ public class DijkstraPathing : MonoBehaviour
             129, 129, 129, 130, 130, 130, 130, 131, 131, 131, 131, 132, 132, 132, 132, 133, 133, 133, 133, 134, 134,
             134, 134, 19, 21, 135, 89, 136, 134
         };
+        // Declara el destino de las aristas
         int[] aristas_destino =
         {
             1, 12, 13, 0, 2, 15, 1, 3, 2, 4, 15, 3, 16, 5, 4, 6, 5, 7, 16, 6, 17, 8, 7, 9, 18, 19, 8, 10, 19, 9, 11,
@@ -100,12 +105,14 @@ public class DijkstraPathing : MonoBehaviour
             129, 121, 128, 110, 130, 129, 111, 131, 97, 120, 112, 132, 130, 113, 119, 131, 133, 132, 118, 114, 116,
             102, 103, 104, 125, 21, 19, 89, 135, 134, 136
         };
+        // Declara el peso de las aristas
         int[] aristas_peso = new int[aristas_origen.Length];
         for (int i = 0; i < aristas_peso.Length; i++)
         {
             aristas_peso[i] = 1;
         }
 
+        // Agrega las aristas a la matriz
         for (int i = 0; i < aristas_peso.Length; i++)
         {
             grafoMa.AgregarArista(aristas_origen[i], aristas_destino[i], aristas_peso[i]);
@@ -114,15 +121,19 @@ public class DijkstraPathing : MonoBehaviour
 
     private void RunDijkstra()
     {
+        // Corre el algoritmo de dijkstra sobre la matriz creada y tiene como inicio la posicion actual del objeto
         AlgDijkstra.Dijkstra(grafoMa, TransformToIndex(pathCurrent));
+        // Guarda los datos del algoritmo como una lista de puntos a recorrer
         UpdateCurrentRoute();
     }
 
     private void UpdateCurrentRoute()
     {
+        // Convierte el array de string que dice el camino a uno de int
         var path = Array.ConvertAll(AlgDijkstra.nodos[pathEnemyIndex].Split(','), Convert.ToInt32);
-        print(AlgDijkstra.nodos[pathEnemyIndex]);
+        // Limpia la ruta anterior 
         activePathing.Clear();
+        // Agrega el array de int a la Queue de ruta despues de transformarlo a un Transform
         for (int i = 0; i < path.Length; i++)
         {
             activePathing.Enqueue(IndexToTransform(path[i]));
@@ -131,50 +142,45 @@ public class DijkstraPathing : MonoBehaviour
 
     private void DijkstraMove()
     {
+        //if (playerOnSight) return;
+        // Se fija si no llego al punto actual de la ruta
         if (!isAtPoint)
         {
-            transform.position =Vector2.MoveTowards(transform.position, pathCurrent.position, moveSpeed * Time.deltaTime);
+            // Como no llego, trata de ir hacia el punto
+            transform.position =
+                Vector2.MoveTowards(transform.position, pathCurrent.position, moveSpeed * Time.deltaTime);
+            // Cuando llega a la posicion cambia el bool
             if (transform.position == pathCurrent.position)
             {
                 isAtPoint = true;
             }
         }
 
+        // Se fija si llego al punto de la ruta
         if (isAtPoint)
         {
+            // Actualiza el siguiente punto de la ruta
             NodeUpdate();
         }
-        // if (!isAtNextPoint)
-        // {
-        //     // Moverse al nodo
-        //     transform.position = Vector2.MoveTowards(transform.position, pathCurrent.position, moveSpeed * Time.deltaTime);
-        //     if (transform.position == pathCurrent.position)
-        //     {
-        //         isAtNextPoint = true;
-        //     }
-        // }
-        //
-        // if (isAtNextPoint)
-        // {
-        //     transform.position = Vector2.MoveTowards(transform.position, pathNext.position, moveSpeed * Time.deltaTime);
-        //     if (transform.position == pathNext.position)
-        //     {
-        //         isAtNextPoint = false;
-        //         NodeUpdate();
-        //     }
-        // }
     }
 
     private void NodeUpdate()
     {
+        // Si no queda mas ruta (llego al final)
         if (activePathing.Count <= 0)
         {
+            // Guarda el ultimo como su posicion actual
             pathLast = transform;
+            // Guarda el actual como su posicion actual
             pathCurrent = transform;
             return;
         }
+
+        // Agarra el siguiente punto de la ruta
         pathCurrent = activePathing.Peek();
+        // Saca el punto de la queue para no repetirlo
         activePathing.Dequeue();
+        // Cambia el bool para que trate de llegar al punto devuelta
         isAtPoint = false;
     }
 

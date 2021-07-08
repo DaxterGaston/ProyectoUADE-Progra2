@@ -2,25 +2,25 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class WaveController : MonoBehaviour
 {
-    private WaveXMLCreator xml;
-    private XmlDocument waveXml;
-    private int[] enemyDistribution = new int[3];
-    private Dictionary<int, DijkstraPathing> waveReferenceDic = new Dictionary<int, DijkstraPathing>();
-    private Queue<DijkstraPathing> waveQueue = new Queue<DijkstraPathing>();
+    private WaveXMLCreator xml; // El creador del documento xml
+    private XmlDocument waveXml; // El documento xml
+    private int[] enemyDistribution = new int[3]; // Array donde guarda los valores de cada tipo de enemigos
+    private Dictionary<int, DijkstraPathing> waveReferenceDic = new Dictionary<int, DijkstraPathing>(); // Diccionario de referencia
+    private Queue<DijkstraPathing> waveQueue = new Queue<DijkstraPathing>(); // Queue de enemigos a spawnear
 
-    public bool IsQueueEmpty => waveQueue.Count <= 0;
+    public bool IsQueueEmpty => waveQueue.Count <= 0; // Bool que se fija si esta vacia la Queue de spawns
+    public int WaveTotalEnemies { get; private set; } // Int que se fija cuantos enemigos tiene en total la wave actual
 
     [SerializeField][Tooltip("Asignar el prefab del enemigo 'rojo'")]
-    private DijkstraPathing redEnemyPrefab;
+    private DijkstraPathing redEnemyPrefab; // Prefab enemigo rojo
     [SerializeField][Tooltip("Asignar el prefab del enemigo 'verde'")]
-    private DijkstraPathing greenEnemyPrefab;
+    private DijkstraPathing greenEnemyPrefab; // Prefab enemigo verde
     [SerializeField][Tooltip("Asignar el prefab del enemigo 'azul'")]
-    private DijkstraPathing blueEnemyPrefab;
+    private DijkstraPathing blueEnemyPrefab; // Prefab enemigo azul
     
 
     private void Awake()
@@ -55,6 +55,7 @@ public class WaveController : MonoBehaviour
             // Si el valor de wave es el que yo busco
             if (waveNumberParsedValue == waveToSetup)
             {
+                WaveTotalEnemies = Int32.Parse(node.Attributes.GetNamedItem("TotalEnemies").Value);
                 // Guardo el atributo Red(cantidad de enemigos de este color que tengo que spawnear) temporalmente
                 var redEnemiesV = Int32.Parse(node.FirstChild.Attributes.GetNamedItem("Red").Value);
                 // Guardo el atributo Green(cantidad de enemigos de este color que tengo que spawnear) temporalmente
@@ -66,7 +67,9 @@ public class WaveController : MonoBehaviour
                 enemyDistribution[0] = redEnemiesV;
                 enemyDistribution[1] = greenEnemiesV;
                 enemyDistribution[2] = blueEnemiesV;
+                // Guardo los valores en un diccionario de referencias
                 WaveDataReference();
+                // Ordeno el array con el algoritmo de quicksort
                 WaveQuickSort();
                 break;
             }
