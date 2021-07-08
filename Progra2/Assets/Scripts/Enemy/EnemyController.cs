@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Diagnostics;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -25,24 +25,58 @@ public class EnemyController : MonoBehaviour
 
     #endregion
 
+    #region Stats
+
     [SerializeField] private int currLifePoints;
     [SerializeField] private int maxLifePoints;
+
+    #endregion
+
+    #region Teleportation
+
+    public bool CanTeleport { get; private set; }
+    [SerializeField] private int _milisecondsToTeleport = 2;
+    private Stopwatch _sw;
+    private TimeSpan _ts;
+
+    #endregion
+
+    #region Animation
+
+    private Animator _animator;
+    private Vector3 _scale;
+    private bool _walking;
+    private bool _lookingRight;
+
+    #endregion
     
     private void Start()
     {
         targetObj = FindObjectOfType<SimplePlayer>().transform;
         currLifePoints = maxLifePoints;
         currentShootingCooldown = maxShootingCooldown;
+        _sw = new Stopwatch();
+        _ts = new TimeSpan(0, 0, 0, _milisecondsToTeleport);
+        _animator = GetComponent<Animator>();
+        _scale = transform.localScale;
     }
 
     private bool IsInSight(Transform target)
     {
         var diff = (target.position - transform.position);
+        if (Vector3.Dot(diff, transform.right) > 0)
+        {
+            _lookingRight = true;
+        }
+        if (Vector3.Dot(diff, transform.right) < 0)
+        {
+            _lookingRight = false;
+        }
         var distance = diff.magnitude;
         if (distance > range) return false;
         var angleToTarget = Vector2.Angle(transform.right, diff.normalized);
         if (angleToTarget > angle / 2) return false;
-        if (Physics.Raycast(transform.position, diff.normalized, distance, mask))
+        if (Physics2D.Raycast(transform.position,diff.normalized,distance,mask))
         {
             return false;
         }
@@ -61,6 +95,7 @@ public class EnemyController : MonoBehaviour
             // Dispara al objetivo
             if (isInShootingRange)
             {
+                _walking = false;
                 currentShootingCooldown -= Time.deltaTime;
                 if (currentShootingCooldown <= 0)
                 {
@@ -71,10 +106,14 @@ public class EnemyController : MonoBehaviour
             }
             if (!isInShootingRange)
             {
+                _walking = true;
                 // Persigue al objetivo
                 transform.position = Vector3.MoveTowards(transform.position, targetObj.transform.position, speed * Time.deltaTime);
             }
         }
+        UpdateAnimations();
+        if (!CanTeleport)
+            if (_sw.Elapsed >= _ts) CanTeleport = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -98,6 +137,31 @@ public class EnemyController : MonoBehaviour
         SpawnController.killedAmount++;
         print(SpawnController.killedAmount);
         Destroy(gameObject);
+    }
+    
+    public void Teleport(Vector3 position)
+    {
+        if (CanTeleport)
+        {
+            transform.position = position;
+            _sw.Start();
+            CanTeleport = false;
+        }
+    }
+    
+    private void UpdateAnimations()
+    {
+        _animator.SetBool("Walking", _walking);
+        if (_lookingRight)
+        {
+            _scale.x = Mathf.Abs(_scale.x);
+        }
+
+        if (!_lookingRight)
+        {
+            _scale.x = Mathf.Abs(_scale.x) * -1;
+        }
+        transform.localScale = _scale;
     }
 
     private void OnDrawGizmosSelected()

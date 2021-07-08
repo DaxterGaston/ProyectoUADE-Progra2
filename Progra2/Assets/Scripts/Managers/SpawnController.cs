@@ -61,7 +61,7 @@ public class SpawnController : MonoBehaviour
 
     [Header("EnemyPool Settings")] [SerializeField]
     private float enemyRespawnTimerCooldown = 3f; // Tiempo maximo entre cada enemigo
-    private BasePool<EnemyBehaviour> enemyArray; // Array de objetos a spawnear
+    private BasePool<EnemyController> enemyArray; // Array de objetos a spawnear
     public List<Transform> spawnEnemyPoints; // Lista de puntos disponibles para spawnear
     private float currentEnemyRespawnTimer;
     private int lastEnemySpawnIndex; // Ultimo punto de spawn
@@ -115,7 +115,7 @@ public class SpawnController : MonoBehaviour
             // Si es spawn por QueuePool
             case EnemySpawningMethod.QueuePool:
                 // Crea un pool donde se guardan los enemigos
-                enemyArray = new BasePool<EnemyBehaviour>();
+                enemyArray = new BasePool<EnemyController>();
                 // Inicializa el pool con valores correspondientes
                 InitializePool();
                 break;
@@ -180,7 +180,7 @@ public class SpawnController : MonoBehaviour
         WinConditions();
     }
 
-    public void StoreEnemy(EnemyBehaviour e)
+    public void StoreEnemy(EnemyController e)
     {
         killedAmount++;
         enemyArray.Store(e);
@@ -307,7 +307,7 @@ public class SpawnController : MonoBehaviour
     private void InitializePool()
     {
         // Genera una lista auxiliar
-        var gos = new List<EnemyBehaviour>();
+        var gos = new List<EnemyController>();
         // Recorre el for con el numero maximo que se le puso como variable
         for (int i = 0; i < enemyAmount; i++)
         {
@@ -316,7 +316,7 @@ public class SpawnController : MonoBehaviour
             // apaga el objeto
             go.SetActive(false);
             // agrega el objeto a la lista
-            gos.Add(go.GetComponent<EnemyBehaviour>());
+            gos.Add(go.GetComponent<EnemyController>());
         }
         // Genera el pool con los objetos de la lista
         enemyArray.CreateInitialInstances(gos);

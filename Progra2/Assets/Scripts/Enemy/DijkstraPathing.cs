@@ -26,7 +26,6 @@ public class DijkstraPathing : MonoBehaviour
         // Guardo la posicion
         pathCurrent = transf;
         // Aplico la posicion
-        print(transform.position);
         transform.position = new Vector3(pathCurrent.position.x,pathCurrent.position.y,-10f);
         // Guarda la posicion anterior
         pathLast = pathCurrent;
@@ -155,7 +154,6 @@ public class DijkstraPathing : MonoBehaviour
 
     private void DijkstraMove()
     {
-        //if (playerOnSight) return;
         // Se fija si no llego al punto actual de la ruta
         if (!isAtPoint)
         {

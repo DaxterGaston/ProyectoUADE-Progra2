@@ -25,6 +25,6 @@ public class Teleport : MonoBehaviour
         if (collision.CompareTag("Player")) 
             collision.transform.parent.position = (_targetTeleportPosition + new Vector3(1, 1, 0));
         if (collision.CompareTag("Enemy"))
-            collision.GetComponent<EnemyBehaviour>().Teleport(_targetTeleportPosition);
+            collision.GetComponent<EnemyController>().Teleport(_targetTeleportPosition);
     }
 }

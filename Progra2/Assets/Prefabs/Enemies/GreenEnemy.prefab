@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 7406567789224244666}
   - component: {fileID: 7406567789224244665}
   - component: {fileID: 7406567789224244668}
-  - component: {fileID: 7406567789224244669}
   - component: {fileID: 7059482456108142249}
+  - component: {fileID: 3156245632708361058}
+  - component: {fileID: 160459333047875729}
   m_Layer: 11
   m_Name: GreenEnemy
   m_TagString: Enemy
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7406567789224244664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 3382430786642355083}
@@ -121,35 +122,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7406567789224244669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7406567789224244664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3876da8a2aa238429521c20bf585f10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  _viewObstacle:
-    serializedVersion: 2
-    m_Bits: 256
-  _firePoint: {fileID: 3382430786642355083}
-  velocidad: 0.8
-  DistanciaDeParado: 0.7
-  DistanciaDeFueraDeVision: 1
-  tiempoDeDisparo: 0
-  tiempoInicialDeDisparo: 0.5
-  bala: {fileID: 1692720124119892159, guid: 0626f9746e5db684cad80fc43b47582e, type: 3}
-  hp: 1
-  nodePosition: {fileID: 0}
-  initialPosition: {fileID: 0}
-  _milisecondsToTeleport: 2
 --- !u!50 &7059482456108142249
 Rigidbody2D:
   serializedVersion: 4
@@ -158,19 +130,59 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7406567789224244664}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  m_CollisionDetection: 1
+  m_Constraints: 0
+--- !u!114 &3156245632708361058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406567789224244664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 161844ab6e03d43428b1f506ba9860f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObj: {fileID: 0}
+  speed: 2.5
+  range: 10
+  angle: 360
+  mask:
+    serializedVersion: 2
+    m_Bits: 256
+  maxShootingCooldown: 1.5
+  bulletPrefab: {fileID: 4728070799110507014, guid: 9ca888ca0f3da2749a3d751769fcb5b2,
+    type: 3}
+  firePoint: {fileID: 3382430786642355083}
+  currLifePoints: 0
+  maxLifePoints: 2
+  _milisecondsToTeleport: 2
+--- !u!114 &160459333047875729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406567789224244664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac9a8e7d3887c04da61372979531469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathEnemyIndex: 53
+  moveSpeed: 2.5
 --- !u!1 &9097412425831098819
 GameObject:
   m_ObjectHideFlags: 0

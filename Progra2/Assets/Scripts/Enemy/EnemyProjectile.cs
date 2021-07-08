@@ -9,7 +9,7 @@ public class EnemyProjectile : MonoBehaviour
 
     private void Start()
     {
-        Invoke("DestroyObject", 3f);
+        Invoke(nameof(DestroyObject), 3f);
     }
 
     private void Update()
@@ -21,10 +21,14 @@ public class EnemyProjectile : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            DestroyObject();
         }
     }
 
+    private void DestroyObject()
+    {
+        Destroy(gameObject);
+    }
     public void SetMoveDirection(Vector3 dir)
     {
         direction = dir;
