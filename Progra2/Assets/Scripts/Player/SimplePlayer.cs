@@ -40,7 +40,7 @@ public class SimplePlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag("EnemyBullet"))
         {
             lifeController.TakeDamage(20);
         }

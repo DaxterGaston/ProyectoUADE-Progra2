@@ -103,7 +103,7 @@ public class SpawnController : MonoBehaviour
 
     #region Win Variables
 
-    private int killedAmount; // Enemigos derrotados
+    public static int killedAmount; // Enemigos derrotados
     [SerializeField] private int queueWinKilledAmount = 10; // Cantidad necesaria de enemigos derrotados necesaria para ganar
     #endregion
 

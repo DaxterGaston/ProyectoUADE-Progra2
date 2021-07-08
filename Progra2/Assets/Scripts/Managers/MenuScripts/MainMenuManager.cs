@@ -79,7 +79,7 @@ public class MainMenuManager : MonoBehaviour
         switch (aux)
         {
            case ButtonSwitch.PlayButton:
-               SceneManager.LoadScene("Level");
+               SceneManager.LoadScene("Level0");
                return;
            case ButtonSwitch.HelpButton:
                mainWindow.SetActive(false);

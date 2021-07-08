@@ -12,13 +12,22 @@ public class DijkstraPathing : MonoBehaviour
     private bool isAtPoint; // Llegue al punto que me corresponde?
     [SerializeField] private int pathEnemyIndex; // El punto final de la ruta
     [SerializeField] private float moveSpeed = 5f; // Velocidad de movimiento del objeto
+    private EnemyController enemyController; // Referencia al script que tiene los metodos de tracking
+
+
+    private void Awake()
+    {
+        // Guardo referencia al controlador del enemigo
+        enemyController = GetComponent<EnemyController>();
+    }
 
     public void SetSpawnPoint(Transform transf)
     {
         // Guardo la posicion
         pathCurrent = transf;
         // Aplico la posicion
-        transform.position = pathCurrent.position;
+        print(transform.position);
+        transform.position = new Vector3(pathCurrent.position.x,pathCurrent.position.y,-10f);
         // Guarda la posicion anterior
         pathLast = pathCurrent;
         // Inicializa
@@ -43,8 +52,12 @@ public class DijkstraPathing : MonoBehaviour
 
     private void Update()
     {
-        // Movimiento utilizando el camino generado por dijkstra
-        DijkstraMove();
+        // Comprueba si puede moverse por dijkstra
+        if (enemyController.DijkstraMove)
+        {
+            // Movimiento utilizando el camino generado por dijkstra
+            DijkstraMove();
+        }
     }
 
     private void GraphCreation()
@@ -147,8 +160,7 @@ public class DijkstraPathing : MonoBehaviour
         if (!isAtPoint)
         {
             // Como no llego, trata de ir hacia el punto
-            transform.position =
-                Vector2.MoveTowards(transform.position, pathCurrent.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, pathCurrent.position, moveSpeed * Time.deltaTime);
             // Cuando llega a la posicion cambia el bool
             if (transform.position == pathCurrent.position)
             {

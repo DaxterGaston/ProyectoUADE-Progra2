@@ -58,19 +58,19 @@ public class EnemyBehaviour : MonoBehaviour
 
         tiempoDeDisparo = tiempoInicialDeDisparo;
         _animator = GetComponent<Animator>();
-        _scale = new Vector3(1, 1, 1);
+        _scale = new Vector3(3, 3, 3);
         Physics2D.queriesStartInColliders = false;
         _pathDone = false;
     }
 
-    void Update()
+     void Update()
     {
         _collider = Physics2D.OverlapCircle(transform.position, DistanciaDeFueraDeVision, _playerLayer);
         if (_collider)
         {
             print(_collider.tag);
             RaycastHit2D hit = Physics2D.Raycast(transform.position, _collider.transform.position, Vector2.Distance(transform.position, _collider.transform.position), _viewObstacle);
-            UnityEngine.Debug.DrawLine((Vector2)transform.position, (Vector2)_collider.transform.position, Color.magenta);
+            //Debug.DrawLine((Vector2)transform.position, (Vector2)_collider.transform.position, Color.magenta);
 
             if (!hit)
             {
@@ -131,33 +131,11 @@ public class EnemyBehaviour : MonoBehaviour
             //}
           
         }
-        // if (!_pathDone)
-        // {   
-        //     transform.position = Vector2.MoveTowards(transform.position, nodePosition.position, velocidad * Time.deltaTime); //Moverse al nodo
-        //     _walking = true;
-        //     if(transform.position == nodePosition.position)
-        //     {
-        //         _pathDone = true; //al llegar, cambiar flag
-        //         _walking = false;
-        //     }
-        // }
-        // else
-        // {
-        //     //TODO: Cambiar esto, y hacer que en vez de moverse de uno al otro, que cambie el valor del nodoPosition por el siguiente nodo
-        //     //A moverse, no se como hacer un array en el ui
-        //     transform.position = Vector2.MoveTowards(transform.position, initialPosition.position, velocidad * Time.deltaTime);
-        //     _walking = true;
-        //     if(transform.position == initialPosition.position)
-        //     {
-        //         _pathDone = false;
-        //         _walking = false;
-        //     }
-        // }
         UpdateAnimations();
         if (!CanTeleport)
             if (_sw.Elapsed >= _ts) CanTeleport = true;
     }
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Bullet"))
@@ -172,8 +150,8 @@ public class EnemyBehaviour : MonoBehaviour
     {
         print(_walking);
         _animator.SetBool("Walking", _walking);
-        if (!_lookingRight) _scale.x = -1;
-        else _scale.x = 1;
+        if (!_lookingRight) _scale.x = -3;
+        else _scale.x = 3;
         transform.localScale = _scale;
     }
 
