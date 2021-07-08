@@ -104,12 +104,12 @@ public class EnemyController : MonoBehaviour
                     currentShootingCooldown = maxShootingCooldown;
                 }
             }
-            if (!isInShootingRange)
-            {
-                _walking = true;
-                // Persigue al objetivo
-                transform.position = Vector3.MoveTowards(transform.position, targetObj.transform.position, speed * Time.deltaTime);
-            }
+            //if (!isInShootingRange)
+            //{
+            //    _walking = true;
+            //    // Persigue al objetivo
+            //    transform.position = Vector3.MoveTowards(transform.position, targetObj.transform.position, speed * Time.deltaTime);
+            //}
         }
         UpdateAnimations();
         if (!CanTeleport)
