@@ -11,6 +11,7 @@ public class WaveController : MonoBehaviour
     private int[] enemyDistribution = new int[3]; // Array donde guarda los valores de cada tipo de enemigos
     private Dictionary<int, DijkstraPathing> waveReferenceDic = new Dictionary<int, DijkstraPathing>(); // Diccionario de referencia
     private Queue<DijkstraPathing> waveQueue = new Queue<DijkstraPathing>(); // Queue de enemigos a spawnear
+    
 
     public bool IsQueueEmpty => waveQueue.Count <= 0; // Bool que se fija si esta vacia la Queue de spawns
     public int WaveTotalEnemies { get; private set; } // Int que se fija cuantos enemigos tiene en total la wave actual
@@ -21,7 +22,12 @@ public class WaveController : MonoBehaviour
     private DijkstraPathing greenEnemyPrefab; // Prefab enemigo verde
     [SerializeField][Tooltip("Asignar el prefab del enemigo 'azul'")]
     private DijkstraPathing blueEnemyPrefab; // Prefab enemigo azul
-    
+
+    public event Action OnWaveSetup;
+    public int CurrentWave { get; private set; }
+    public int RedEnemies { get; private set; }
+    public int GreenEnemies { get; private set; }
+    public int BlueEnemies { get; private set; }
 
     private void Awake()
     {
@@ -56,6 +62,7 @@ public class WaveController : MonoBehaviour
             if (waveNumberParsedValue == waveToSetup)
             {
                 WaveTotalEnemies = Int32.Parse(node.Attributes.GetNamedItem("TotalEnemies").Value);
+                CurrentWave = waveToSetup;
                 // Guardo el atributo Red(cantidad de enemigos de este color que tengo que spawnear) temporalmente
                 var redEnemiesV = Int32.Parse(node.FirstChild.Attributes.GetNamedItem("Red").Value);
                 // Guardo el atributo Green(cantidad de enemigos de este color que tengo que spawnear) temporalmente
@@ -65,12 +72,16 @@ public class WaveController : MonoBehaviour
 
                 //Guardo cada valor en un array
                 enemyDistribution[0] = redEnemiesV;
+                RedEnemies = redEnemiesV;
                 enemyDistribution[1] = greenEnemiesV;
+                GreenEnemies = greenEnemiesV;
                 enemyDistribution[2] = blueEnemiesV;
+                BlueEnemies = blueEnemiesV;
                 // Guardo los valores en un diccionario de referencias
                 WaveDataReference();
                 // Ordeno el array con el algoritmo de quicksort
                 WaveQuickSort();
+                OnWaveSetup?.Invoke();
                 break;
             }
         }

@@ -104,7 +104,21 @@ public class SpawnController : MonoBehaviour
     #region Win Variables
 
     public static int killedAmount; // Enemigos derrotados
+
+    public void KillUpdate()
+    {
+        OnKillConfirmed?.Invoke();
+    }
+    
     [SerializeField] private int queueWinKilledAmount = 10; // Cantidad necesaria de enemigos derrotados necesaria para ganar
+    public int QueuePoolObjective => queueWinKilledAmount; 
+        
+    #endregion
+
+    #region HUD
+
+    public event Action OnKillConfirmed;
+    
     #endregion
 
     private void Start()

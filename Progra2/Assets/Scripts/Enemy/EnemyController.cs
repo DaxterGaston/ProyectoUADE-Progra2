@@ -135,7 +135,7 @@ public class EnemyController : MonoBehaviour
     private void DestroyEnemy()
     {
         SpawnController.killedAmount++;
-        print(SpawnController.killedAmount);
+        SpawnController.Instance.KillUpdate();
         Destroy(gameObject);
     }
     
