@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour
     private TimeSpan _ts;
     private Stopwatch _sw;
     public Vector3 Direction;
+    public Vector3 LookDirection;
     
     // Start is called before the first frame update
     void Start()

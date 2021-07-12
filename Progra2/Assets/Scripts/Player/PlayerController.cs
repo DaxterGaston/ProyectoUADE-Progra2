@@ -104,8 +104,13 @@ public class PlayerController : MonoBehaviour
     public void Shoot()
     {
         var shootDirection = (_mouse - (Vector2)_firePoint.position).normalized;
-        var go = Instantiate(_bullet, _firePoint.position, Quaternion.identity);
-        go.GetComponent<Bullet>().Direction = shootDirection;
+        Vector3 diff = (Vector3)_mouse - transform.position;
+        diff.Normalize();
+        float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+        
+        var go = Instantiate(_bullet, _firePoint.position, Quaternion.Euler(0f, 0f, rot_z + 180));
+        var bullet = go.GetComponent<Bullet>();
+        bullet.Direction = shootDirection;
     }
 
     private void Reload() { _currentBullets = _maxBullets; }
