@@ -15,7 +15,7 @@ public class SpeedPack : PickUp
         target = other.gameObject.GetComponent(typeof(MovementController)) as MovementController; // Guarda la referencia del controlador de vida
     }
 
-    public override void itemAction() // Accion que llama el jugador
+    public override void ItemAction() // Accion que llama el jugador
     {
         target.ChangeSpeedModifier(speedAmount, speedDuration); // Accion que realiza este item en particular
     }

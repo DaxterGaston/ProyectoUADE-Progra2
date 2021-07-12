@@ -14,6 +14,7 @@ public class Ammo : MonoBehaviour
     
     public float CurrentAmmo { get; private set; }
     public float MaxAmmo => maxAmmo;
+    public bool IsOutOfAmmo => isOutOfAmmo;
     public float GetRatio => CurrentAmmo / maxAmmo;
 
     private void Awake()

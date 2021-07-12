@@ -20,12 +20,12 @@ public class PickUp : MonoBehaviour
         spawnController = FindObjectOfType(typeof(SpawnController)) as SpawnController;
     }
 
-    public virtual void itemAction(){} // Reemplaza en sus hijos con la accion que va a realizar el item
+    public virtual void ItemAction(){} // Reemplaza en sus hijos con la accion que va a realizar el item
 
     public virtual void OnCollisionEnter2D(Collision2D other)
     {
-        if (!other.gameObject.GetComponent(typeof(SimplePlayer))) return;
+        if (!other.gameObject.GetComponent(typeof(Player))) return;
         spawnController.ReduceSpawnedItemCount();
-        transform.position = new Vector3(-1000,-1000);
+        transform.position = new Vector2(-1000,-1000);
     }
 }

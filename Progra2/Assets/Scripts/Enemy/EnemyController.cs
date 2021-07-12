@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour
     
     private void Start()
     {
-        targetObj = FindObjectOfType<SimplePlayer>().transform;
+        targetObj = FindObjectOfType<Player>().transform;
         currLifePoints = maxLifePoints;
         currentShootingCooldown = maxShootingCooldown;
         _sw = new Stopwatch();

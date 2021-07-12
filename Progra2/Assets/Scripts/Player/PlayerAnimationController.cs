@@ -8,7 +8,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     [SerializeField] private Camera cam;
     private Animator animator;
-    private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform crosshair;
 
     #endregion
@@ -26,7 +26,6 @@ public class PlayerAnimationController : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
         scale = transform.localScale;
     }
 

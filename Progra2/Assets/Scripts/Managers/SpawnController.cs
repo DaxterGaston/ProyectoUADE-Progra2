@@ -103,7 +103,7 @@ public class SpawnController : MonoBehaviour
 
     #region Win Variables
 
-    public static int killedAmount; // Enemigos derrotados
+    public static int killedAmount = 0; // Enemigos derrotados
 
     public void KillUpdate()
     {
@@ -123,6 +123,7 @@ public class SpawnController : MonoBehaviour
 
     private void Start()
     {
+        killedAmount = 0;
         // Switch para que no haga las cosas que no le corresponden
         switch (enemySpawnMethod)
         {
@@ -143,6 +144,7 @@ public class SpawnController : MonoBehaviour
                 waveController.WaveSetup(currentWave, maxNumberOfWaves);
                 // Guarda las referencia a donde pueden spawnear los enemigos
                 dijkstraSpawningPoints =  new []{05,12,25,31,38,45,65,70,72,77,81,90,92,97,106,112,127,130};
+                OnKillConfirmed?.Invoke();
                 break;
             default: throw new ArgumentOutOfRangeException();
         }
