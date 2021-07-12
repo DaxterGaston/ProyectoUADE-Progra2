@@ -99,8 +99,12 @@ public class EnemyController : MonoBehaviour
                 currentShootingCooldown -= Time.deltaTime;
                 if (currentShootingCooldown <= 0)
                 {
-                    var go = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-                    go.SetMoveDirection((targetObj.position - transform.position).normalized);
+                    var shootDirection = targetObj.position - transform.position;
+                    shootDirection.Normalize();
+                    float rot_z = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
+
+                    var go = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0f, 0f, rot_z + 180));
+                    go.SetMoveDirection(shootDirection.normalized);
                     currentShootingCooldown = maxShootingCooldown;
                 }
             }

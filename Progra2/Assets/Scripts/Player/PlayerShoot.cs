@@ -9,6 +9,8 @@ public class PlayerShoot : MonoBehaviour
     private Vector2 mousePoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
+    [SerializeField]
+    private AudioSource _shootSound;
 
     private void Awake()
     {
@@ -38,5 +40,6 @@ public class PlayerShoot : MonoBehaviour
         var go = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0f, 0f, rot_z + 180));
         var bullet = go.GetComponent<Bullet>();
         bullet.Direction = shootDirection;
+        _shootSound.Play();
     }
 }

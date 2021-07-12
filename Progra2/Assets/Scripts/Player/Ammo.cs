@@ -7,6 +7,8 @@ public class Ammo : MonoBehaviour
     private float maxAmmo = 5f;
     [SerializeField][Tooltip("Time to reload")] 
     private float reloadTime = 1f;
+    [SerializeField]
+    private AudioSource _reloadSound;
     private bool isOutOfAmmo;
 
     public event Action OnAmmoUse;
@@ -70,6 +72,7 @@ public class Ammo : MonoBehaviour
     {
         CurrentAmmo = maxAmmo;
         OnAmmoReload?.Invoke();
+        _reloadSound.Play();
         isOutOfAmmo = false;
     }
 }
