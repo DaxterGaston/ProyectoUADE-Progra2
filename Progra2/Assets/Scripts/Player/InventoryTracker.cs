@@ -11,6 +11,7 @@ public class InventoryTracker : MonoBehaviour
     private bool isItemUsable = true; // Bool para saber si puedo usar el siguiente item
 
     public Image[] inventorySlots; // Array de imagenes para mostrar los items
+    [SerializeField] private Sprite emptySlot;
     public bool IsItemUsable // Propiedad del bool de uso para agregarle funcionalidad
     {
         get => isItemUsable;
@@ -19,30 +20,44 @@ public class InventoryTracker : MonoBehaviour
             isItemUsable = value;
             if (!isItemUsable)
             {
-                 print("No"); // Se puede cambiar por algun sonido o visualmente para saber que no puedo usar un item
-                 return;
+                foreach (var image in inventorySlots)
+                {
+                    image.color = Color.red;
+                }
+                return;
             }
-            print("Yes"); // Se puede cambiar por algun sonido o visualmente para saber que si puedo usar un item
+            foreach (var image in inventorySlots)
+            {
+                image.color = Color.white;
+            }
         }
     } 
 
     private void Start()
     {
-        DisplaySprite(); // Hace el primer update al display del inventario
+        // Hace el primer update al display del inventario
+        foreach (var image in inventorySlots)
+        {
+            if (image.sprite == null)
+            {
+                image.sprite = emptySlot;
+            }
+        } 
     }
 
     private void AddItemToStack(PickUp item) // Pide el item que va a agregar al stack
     {
         inventory.Push(item); // Agrega el item al stack
-        DisplaySprite(); // Actualiza el display del inventario
+        DisplaySprites(); // Actualiza el display del inventario
     }
 
     private void UseItemInStack() // Pide el item que va a utilizar el jugador
     {
         var itemToUse = inventory.Pop(); // Guarda temporalmente el item que sale del stack
-        itemToUse.itemAction();// Activa el item que sale del stack
-        DisplaySprite(); // Actualiza el display del inventario
+        itemToUse.ItemAction();// Activa el item que sale del stack
         Destroy(itemToUse);
+        EmptySlotCheck();
+        DisplaySprites(); // Actualiza el display del inventario
     }
 
     private void Update()
@@ -72,28 +87,25 @@ public class InventoryTracker : MonoBehaviour
         var itemToAdd = other.gameObject.GetComponent(typeof(PickUp)) as PickUp; // Guardo el componente PickUp en una variable 
         AddItemToStack(itemToAdd); // Pide el item que va a agregar al stack
     }
-
-    private void DisplaySprite() // Actualiza el display del inventario
+    
+    private void DisplaySprites()
     {
-        if (inventory.Count < inventorySlots.Length) // Se fija si va a haber espacios vacios
+        for (int i = 0; i < inventorySlots.Length; i++)
         {
-            for (int i = 0; i < inventory.Count; i++) // Cambia cada espacio no vacio por el sprite correspondiente
+            if (inventory.Count > i && i < inventorySlots.Length)
             {
                 inventorySlots[i].sprite = inventory.ToArray()[i].SpriteRenderer.sprite;
-                inventorySlots[i].enabled = true;
-            }
-
-            for (int j = inventory.Count; j < inventorySlots.Length; j++) // Cambia cada espacio vacio a que no se muestre
-            {
-                inventorySlots[j].sprite = null;
-                inventorySlots[j].enabled = false;
             }
         }
-        if (inventory.Count >= inventorySlots.Length) // Continua actualizando cuando el stack es mayor al display
+    }
+
+    private void EmptySlotCheck()
+    {
+        if (inventory.Count < inventorySlots.Length)
         {
-            for (int i = 0; i < inventorySlots.Length; i++)
+            for (int i = inventory.Count; i < inventorySlots.Length; i++)
             {
-                inventorySlots[i].sprite = inventory.ToArray()[i].SpriteRenderer.sprite;
+                inventorySlots[i].sprite = emptySlot;
             }
         }
     }

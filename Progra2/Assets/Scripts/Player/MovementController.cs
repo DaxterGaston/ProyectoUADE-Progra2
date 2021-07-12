@@ -20,6 +20,9 @@ public class MovementController : MonoBehaviour
     
     private void Update()
     {
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
+        
         if (isSpeedBuffed) // Timer para la duracion del aumento de velocidad
         {
             speedUpDuration -= Time.deltaTime;

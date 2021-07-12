@@ -3,20 +3,30 @@
   <component name="ChangeListManager">
     <list default="true" id="12033136-2f99-4253-9aff-87ed0ef0ed98" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Progra2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Progra2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AllTheTests/OldPrefabs/NewEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AllTheTests/OldPrefabs/NewEnemy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/EnemyController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/EnemyController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Sombreado.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Sombreado.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AllTheTests/OldScenes/_UITesting.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AllTheTests/OldScenes/_UITesting.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Ammo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Ammo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Blockletter SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Blockletter SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/PlayerAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/PlayerAnimationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemies/BlueEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/BlueEnemy.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemies/GreenEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/GreenEnemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemies/QueuePoolEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/QueuePoolEnemy.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemies/RedEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/RedEnemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PickUps/ArmorPack.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/PickUps/ArmorPack.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PickUps/HealthPack.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/PickUps/HealthPack.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Defeat.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Defeat.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Level0.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Level0.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/DijkstraPathing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/DijkstraPathing.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyBehaviour.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyBehaviour.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyProjectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyProjectile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Win.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Win.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/SpawnController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/SpawnController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Teleports/Teleport.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Teleports/Teleport.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pickups/ArmorPack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pickups/ArmorPack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pickups/HealthPack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pickups/HealthPack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pickups/PickUp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pickups/PickUp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pickups/SpeedPack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pickups/SpeedPack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/InventoryTracker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/InventoryTracker.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WaveDisplay.xml" beforeDir="false" afterPath="$PROJECT_DIR$/WaveDisplay.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +38,14 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/HUDManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Ammo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/PlayerShoot.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Destructible.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/65CAB14A-C59E-4552-B77F-98A4AED18F9E/1b/92e9fc7c/Physics2D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Armor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/PlayerAnimationController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Health.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/04C5C85C-7E5E-4A4A-B66D-06C5A6DEE283/2c/695cbcc5/Void.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -44,9 +61,7 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/QuickSort/DijkstraPathing.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/QuickSort/WaveController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/StackTest/SpawnController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Managers/WaveController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyBehaviour.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Player/SimplePlayer.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Utilities/Bullet.cs" />
       <option value="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/EnemyController.cs" />
@@ -54,9 +69,26 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/DijkstraPathing.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyProjectile.cs" />
       <option value="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/EnemyBehaviour.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Managers/SpawnController.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Managers/Teleports/Teleport.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Player/MovementController.cs" />
+      <option value="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Destructable.cs" />
+      <option value="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Destructible.cs" />
+      <option value="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Health.cs" />
+      <option value="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Armor.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Managers/WaveController.cs" />
+      <option value="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/HUDManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Player/SimplePlayer.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Player/ViewCone.cs" />
+      <option value="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/PlayerAnimationController.cs" />
+      <option value="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Ammo.cs" />
+      <option value="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/PlayerShoot.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/PickUp.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/HealthPack.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/ArmorPack.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Player/InventoryTracker.cs" />
+      <option value="$PROJECT_DIR$/Assets/AllTheTests/OldScripts/UiTest/Player.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Managers/SpawnController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1rbBcXQVWYxSqYwDPo917JmmrXt" />
@@ -113,7 +145,8 @@
       <workItem from="1625097666221" duration="1545000" />
       <workItem from="1625113017139" duration="823000" />
       <workItem from="1625567089711" duration="23440000" />
-      <workItem from="1625743590287" duration="27748000" />
+      <workItem from="1625743590287" duration="33248000" />
+      <workItem from="1626025818693" duration="35397000" />
     </task>
     <servers />
   </component>
@@ -129,6 +162,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
