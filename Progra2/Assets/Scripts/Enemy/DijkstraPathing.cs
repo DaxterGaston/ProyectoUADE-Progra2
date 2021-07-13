@@ -1,24 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DijkstraPathing : MonoBehaviour
 {
     private Transform[] pathPoints; // Array con todos los puntos del grafo
     private GrafoMA grafoMa; // Matriz de adyacencia donde se guardan todos los datos para utilizar en Dijkstra
     private Queue<Transform> activePathing = new Queue<Transform>(); // Lista de puntos que tiene que recorrer
-    private Transform pathCurrent; // Punto al que tiene que llegar 
+    public Transform pathCurrent; // Punto al que tiene que llegar 
     private Transform pathLast; // Quizas se usa para algo despues (si patrulla sobre una camino especifico)
     private bool isAtPoint; // Llegue al punto que me corresponde?
     [SerializeField] private int pathEnemyIndex; // El punto final de la ruta
     [SerializeField] private float moveSpeed = 5f; // Velocidad de movimiento del objeto
     private EnemyController enemyController; // Referencia al script que tiene los metodos de tracking
+    private Rigidbody2D rb;
+    private float areaDistance = 0.1f; // Area alrededor del punto a donde tiene que llegar para que no tenga que ser tan preciso
 
 
     private void Awake()
     {
         // Guardo referencia al controlador del enemigo
         enemyController = GetComponent<EnemyController>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void SetSpawnPoint(Transform transf)
@@ -49,7 +53,7 @@ public class DijkstraPathing : MonoBehaviour
         NodeUpdate();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         // Comprueba si puede moverse por dijkstra
         if (enemyController.DijkstraMove)
@@ -93,7 +97,7 @@ public class DijkstraPathing : MonoBehaviour
             118, 119, 119, 119, 119, 120, 120, 120, 120, 121, 121, 121, 121, 122, 122, 122, 122, 123, 123, 123, 123,
             124, 124, 124, 124, 125, 125, 125, 125, 125, 126, 126, 126, 127, 127, 127, 127, 128, 128, 128, 128, 129,
             129, 129, 129, 130, 130, 130, 130, 131, 131, 131, 131, 132, 132, 132, 132, 133, 133, 133, 133, 134, 134,
-            134, 134, 19, 21, 135, 89, 136, 134
+            134, 134, 19, 21, 135, 89, 136, 134,
         };
         // Declara el destino de las aristas
         int[] aristas_destino =
@@ -115,7 +119,7 @@ public class DijkstraPathing : MonoBehaviour
             117, 133, 119, 118, 99, 132, 120, 119, 96, 131, 121, 98, 120, 129, 122, 121, 99, 123, 109, 100, 122,
             128, 124, 101, 123, 127, 125, 124, 102, 104, 126, 134, 105, 125, 127, 124, 126, 107, 128, 108, 123, 127,
             129, 121, 128, 110, 130, 129, 111, 131, 97, 120, 112, 132, 130, 113, 119, 131, 133, 132, 118, 114, 116,
-            102, 103, 104, 125, 21, 19, 89, 135, 134, 136
+            102, 103, 104, 125, 21, 19, 89, 135, 134, 136,
         };
         // Declara el peso de las aristas
         int[] aristas_peso = new int[aristas_origen.Length];
@@ -154,24 +158,25 @@ public class DijkstraPathing : MonoBehaviour
 
     private void DijkstraMove()
     {
+        var dir = (pathCurrent.position - transform.position);
         // Se fija si no llego al punto actual de la ruta
         if (!isAtPoint)
         {
-            // Como no llego, trata de ir hacia el punto
-            transform.position = Vector3.MoveTowards(transform.position, pathCurrent.position, moveSpeed * Time.deltaTime);
             // Cuando llega a la posicion cambia el bool
-            if (transform.position == pathCurrent.position)
+            if (dir.magnitude <= areaDistance)
             {
+                // poner un offset para que no tenga que ser tan preciso
                 isAtPoint = true;
             }
         }
-
         // Se fija si llego al punto de la ruta
         if (isAtPoint)
         {
             // Actualiza el siguiente punto de la ruta
             NodeUpdate();
         }
+        // Como no llego, trata de ir hacia el punto
+        rb.velocity = (dir.normalized * (moveSpeed * Time.deltaTime));
     }
 
     private void NodeUpdate()

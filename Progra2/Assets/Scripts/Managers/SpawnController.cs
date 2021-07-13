@@ -236,11 +236,11 @@ public class SpawnController : MonoBehaviour
     {
         while (true)
         {
+            // Como habia algo tengo que cambiar la posicion indicada a una diferente hasta que encuentre una vacia
+            lastEnemySpawnIndex = DifferentRandomNumber(lastEnemySpawnIndex, spawnEnemyPoints.Count);
             // Comprueba si hay algo en la posicion indicada
             if (Physics2D.OverlapCircle(spawnEnemyPoints[lastEnemySpawnIndex].position, spawnerEnemyRadiusCheck, spawnerEnemyLayerCheck))
             {
-                // Como habia algo tengo que cambiar la posicion indicada a una diferente hasta que encuentre una vacia
-                lastEnemySpawnIndex = DifferentRandomNumber(lastEnemySpawnIndex, spawnEnemyPoints.Count);
                 continue;
             }
             // Comprueba que la posicion este vacia
@@ -257,11 +257,11 @@ public class SpawnController : MonoBehaviour
     {
         while (true)
         {
+            // Como habia algo en el spawn point, lo cambia hasta que sea uno diferente
+            lastEnemySpawnIndex = DifferentRandomNumber(lastEnemySpawnIndex, dijkstraSpawningPoints.Length);
             // Se fija si hay algo donde quiere spawnear
             if (Physics2D.OverlapCircle(dijkstraPathPoints[dijkstraSpawningPoints[lastEnemySpawnIndex]].position, spawnerEnemyRadiusCheck, spawnerEnemyLayerCheck))
             {
-                // Como habia algo en el spawn point, lo cambia hasta que sea uno diferente
-                lastEnemySpawnIndex = DifferentRandomNumber(lastEnemySpawnIndex, dijkstraSpawningPoints.Length);
                 continue;
             }
             // Comprueba que no haya nadie donde quiere spawnear
@@ -295,11 +295,11 @@ public class SpawnController : MonoBehaviour
     {
         while (true)
         {
+            // Cambia el lugar de spawn hasta que encuentre uno vacio
+            lastItemSpawnIndex = DifferentRandomNumber(lastItemSpawnIndex, spawnItemPoints.Count);
             // Se fija si hay algo donde quiere spawnear
             if (Physics2D.OverlapCircle(spawnItemPoints[lastItemSpawnIndex].position, spawnerItemRadiusCheck, spawnerItemLayerCheck))
             {
-                // Cambia el lugar de spawn hasta que encuentre uno vacio
-                lastItemSpawnIndex = DifferentRandomNumber(lastItemSpawnIndex, spawnItemPoints.Count);
                 continue;
             }
             // Se fija si esta vacio

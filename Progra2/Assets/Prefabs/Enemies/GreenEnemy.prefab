@@ -162,13 +162,14 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 256
+  debugDij: 0
   maxShootingCooldown: 1.5
   bulletPrefab: {fileID: 4728070799110507014, guid: 9ca888ca0f3da2749a3d751769fcb5b2,
     type: 3}
   firePoint: {fileID: 3382430786642355083}
   currLifePoints: 0
   maxLifePoints: 2
-  _milisecondsToTeleport: 2
+  _milisecondsToTeleport: 15
 --- !u!114 &160459333047875729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,8 +182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ac9a8e7d3887c04da61372979531469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathCurrent: {fileID: 0}
   pathEnemyIndex: 53
-  moveSpeed: 2.5
+  moveSpeed: 150
 --- !u!1 &9097412425831098819
 GameObject:
   m_ObjectHideFlags: 0

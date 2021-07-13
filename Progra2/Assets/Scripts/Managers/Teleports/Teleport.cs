@@ -30,7 +30,17 @@ public class Teleport : MonoBehaviour
             collision.transform.parent.position = (_targetTeleportPosition + new Vector3(1, 1, 0));
             _audio.Play();
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
         if (collision.CompareTag("Enemy"))
             collision.GetComponent<EnemyController>().Teleport(_targetTeleportPosition);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 0.1f);
     }
 }

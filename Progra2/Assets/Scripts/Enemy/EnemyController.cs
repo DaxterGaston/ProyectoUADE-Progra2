@@ -12,7 +12,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float angle;
     [SerializeField] private LayerMask mask;
     private bool isInShootingRange;
-    public bool DijkstraMove => (!IsInSight(targetObj));
+    public bool DijkstraMove { get; private set; }
+    public bool debugDij;
 
     #endregion
 
@@ -34,7 +35,7 @@ public class EnemyController : MonoBehaviour
 
     #region Teleportation
 
-    public bool CanTeleport { get; private set; }
+    public bool CanTeleport { get; private set; } = true;
     [SerializeField] private int _milisecondsToTeleport = 2;
     private Stopwatch _sw;
     private TimeSpan _ts;
@@ -59,6 +60,7 @@ public class EnemyController : MonoBehaviour
         _ts = new TimeSpan(0, 0, 0, _milisecondsToTeleport);
         _animator = GetComponent<Animator>();
         _scale = transform.localScale;
+        DijkstraMove = true;
     }
 
     private bool IsInSight(Transform target)
@@ -73,17 +75,27 @@ public class EnemyController : MonoBehaviour
             _lookingRight = false;
         }
         var distance = diff.magnitude;
-        if (distance > range) return false;
+        if (distance > range)
+        {
+            DijkstraMove = true;
+            return false;
+        }
         var angleToTarget = Vector2.Angle(transform.right, diff.normalized);
-        if (angleToTarget > angle / 2) return false;
+        if (angleToTarget > angle / 2)
+        {
+            DijkstraMove = true;
+            return false;
+        }
         if (Physics2D.Raycast(transform.position,diff.normalized,distance,mask))
         {
+            DijkstraMove = true;
             return false;
         }
         isInShootingRange = false;
         if (distance <= range / 2)
         {
             isInShootingRange = true;
+            DijkstraMove = false;
         }
         return true;
     }
@@ -117,7 +129,15 @@ public class EnemyController : MonoBehaviour
         }
         UpdateAnimations();
         if (!CanTeleport)
-            if (_sw.Elapsed >= _ts) CanTeleport = true;
+        {
+            DijkstraMove = true;
+            if (_sw.Elapsed >= _ts)
+            {
+                CanTeleport = true;
+            }
+        }
+
+        debugDij = DijkstraMove;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -147,6 +167,7 @@ public class EnemyController : MonoBehaviour
     {
         if (CanTeleport)
         {
+            DijkstraMove = false;
             transform.position = position;
             _sw.Start();
             CanTeleport = false;

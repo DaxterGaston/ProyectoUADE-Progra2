@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <WaveDisplay NumberOfWaves="5">
-  <Wave WaveNumber="1" TotalEnemies="16">
-    <Enemies Red="10" Green="1" Blue="5" />
+  <Wave WaveNumber="1" TotalEnemies="20">
+    <Enemies Red="17" Green="1" Blue="2" />
   </Wave>
-  <Wave WaveNumber="2" TotalEnemies="26">
-    <Enemies Red="12" Green="10" Blue="4" />
+  <Wave WaveNumber="2" TotalEnemies="30">
+    <Enemies Red="11" Green="2" Blue="17" />
   </Wave>
-  <Wave WaveNumber="3" TotalEnemies="36">
-    <Enemies Red="15" Green="13" Blue="8" />
+  <Wave WaveNumber="3" TotalEnemies="35">
+    <Enemies Red="26" Green="2" Blue="7" />
   </Wave>
-  <Wave WaveNumber="4" TotalEnemies="46">
-    <Enemies Red="43" Green="1" Blue="2" />
+  <Wave WaveNumber="4" TotalEnemies="40">
+    <Enemies Red="6" Green="7" Blue="27" />
   </Wave>
-  <Wave WaveNumber="5" TotalEnemies="55">
-    <Enemies Red="41" Green="3" Blue="11" />
+  <Wave WaveNumber="5" TotalEnemies="50">
+    <Enemies Red="34" Green="3" Blue="13" />
   </Wave>
 </WaveDisplay>
